@@ -5,7 +5,7 @@ name="script.sh" #Name of your script file
 version="1.0_stable" #Version of your script
 source="/system/xbin/" #Source of your script
 download="https://www.yourpage.com/script.sh" #URL to download your script
-check=" $EXTERNAL_STORAGE/Download/check.update"
+check="$EXTERNAL_STORAGE/Download/check.update"
 script="$EXTERNAL_STORAGE/Download/$name"
 
 check_update(){
