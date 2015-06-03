@@ -46,9 +46,9 @@ clear
 echo
 echo "Downloading..."
 sleep 1
-am start $download
+am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $download
 sleep 3
-am force-stop com.android.chrome
+am force-stop com.android.browser
 echo
 echo "Installing..."
 sleep 1
