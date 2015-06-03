@@ -1,6 +1,6 @@
 #Add this lines on the top of your script
 
-am start https://www.yoursite.com/check.update #URL to download your check.update file
+am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity https://www.yoursite.com/check.update #URL to download your check.update file
 sleep 3
 am force-stop com.android.browser
 sleep 2
