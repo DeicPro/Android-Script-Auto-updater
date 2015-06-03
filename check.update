@@ -25,7 +25,6 @@ fi
 }
 
 install_update(){
-if [ e- $script ]; then
 echo
 echo "A new version of the script was found..."
 echo
@@ -38,7 +37,6 @@ y|Y) install_update_apply;;
 n|N) safe_exit;;
 *) echo "Write Y or N and press enter..." && install_update;;
 esac
-fi
 }
 
 install_update_apply(){
