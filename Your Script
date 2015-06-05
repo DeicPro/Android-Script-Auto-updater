@@ -1,7 +1,28 @@
+#Android Script Auto-updater v1.1 By Deic
 #Add this lines on the top of your script
 
-am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity https://www.yoursite.com/check.update #URL to download your check.update file
-sleep 3
+name="check.update"
+download="http://www.yoursite.com/check.update" #URL to download your check.update file
+check="$EXTERNAL_STORAGE/Download/$name"
+
+check_update(){
+if [ -e $check ]; then
 am force-stop com.android.browser
-sleep 2
-sh $EXTERNAL_STORAGE/Download/check.update
+sh $check
+else
+wait_download
+fi
+}
+
+wait_download(){
+check_update
+}
+
+am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $download
+clear
+am start -a android.intent.action.MAIN -n jackpal.androidterm/.Term
+clear
+check_update
+
+echo
+echo "ver="1.0_stable""
