@@ -1,10 +1,10 @@
-#Android Script Auto-updater v1.0 By Deic
+#Android Script Auto-updater v1.1 By Deic
 
 #functions
-name="script.sh" #Name of your script file
+name="your.script" #Name of your script file
 version="1.0_stable" #Version of your script
 source="/system/xbin/" #Source of your script
-download="https://www.yourpage.com/script.sh" #URL to download your script
+download="http://www.yoursite.com/your.script" #URL to download your script
 check="$EXTERNAL_STORAGE/Download/check.update"
 script="$EXTERNAL_STORAGE/Download/$name"
 
@@ -20,44 +20,57 @@ echo "You have the latest version."
 sleep 1
 safe_exit
 else
-install_update
+download_update
 fi
 }
 
-install_update(){
+download_update(){
+clear
 echo
 echo "A new version of the script was found..."
 echo
-echo "Want install it? (Y/N)"
+echo "Want download it? (Y/N)"
 echo
 echo -ne "> "
-read install_update_opt
-case $install_update_opt in
-y|Y) install_update_apply;;
+read download_update_opt
+case $download_update_opt in
+y|Y) download_update_apply;;
 n|N) safe_exit;;
-*) echo "Write Y or N and press enter..." && install_update;;
+*) echo "Write Y or N and press enter..." && download_update;;
 esac
 }
 
-install_update_apply(){
+download_update_apply(){
 clear
 echo
 echo "Downloading..."
 sleep 1
 am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $download
-sleep 3
+clear
+am start -a android.intent.action.MAIN -n jackpal.androidterm/.Term
+clear
+install_update
+}
+
+install_update(){
+if [ -e $script ]; then
 am force-stop com.android.browser
 echo
 echo "Installing..."
-sleep 1
 cp -f -r $script $source
 sleep 2
-chmod 777 $source/$name
-chown 0:0 $source/$name
+chmod 777 $source$name
 echo
 echo "Done."
 sleep 1
-safe_exit
+$SHELL -c $source$name
+else
+wait_download
+fi
+}
+
+wait_download(){
+install_update
 }
 
 safe_exit(){
