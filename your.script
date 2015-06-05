@@ -23,6 +23,3 @@ clear
 am start -a android.intent.action.MAIN -n jackpal.androidterm/.Term
 clear
 check_update
-
-echo
-echo "ver="1.0_stable""
