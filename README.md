@@ -4,13 +4,15 @@ A stuff to auto-update your script
 
 #How to
 
-1• Download Android Terminal Emulator:
+#1• Download Android Terminal Emulator:
 
 https://play.google.com/store/apps/details?id=jackpal.androidterm
 
-2• Download SH-OTA.sh
 
-3• Edit SH-OTA file
+#2• Download SH-OTA.sh
+
+
+#3• Edit SH-OTA file
 
 3.1• Put the name of your own script, example:
 
@@ -28,7 +30,8 @@ source="/system/xbin/"
 
 download="https://www.Your-Site.com/Your-Script.sh"
 
-4• Edit your own script
+
+#4• Edit your own script
 
 4.1• Add the content of Your-Script.sh in the top of your own script
 
@@ -36,7 +39,8 @@ download="https://www.Your-Site.com/Your-Script.sh"
 
 download="https://www.Your-Site.com/SH-OTA.sh
 
-5• Upload SH-OTA file
+
+#5• Upload SH-OTA file
 
 5.1• Upload to the same site as you put in the file as:
 
