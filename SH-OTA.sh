@@ -8,86 +8,89 @@ source="/system/xbin/" #Source of your script
 download="https://www.Your-Site.com/Your-Script.sh" #URL to download your script
 check="$EXTERNAL_STORAGE/Download/SH-OTA.sh"
 script="$EXTERNAL_STORAGE/Download/$name"
-rw="mount -o remount rw /system"
-ro="mount -o remount ro /system"
+null=`>/dev/null 2>&1`
+rm=`rm -f -r`
+sl=`sleep 1`
+ec="echo"
+cl="clear"
+am=`am start -a android.intent.action`
 }
 
-check_update(){
-echo
-echo "Checking updates..."
-sleep 1
-if [ grep $version $source/$name > /dev/null 2>&1 ]; then
-clear
-rm -f -r $check
-echo
-echo "You have the latest version."
-sleep 1
-safe_exit
+che(){
+$ec
+$ec "Checking updates..."
+$sl
+if [ grep $version $source/$name $null ]; then
+$cl
+$rm $check
+$ec
+$ec "You have the latest version."
+$sl
+saf
 else
-download_update
+dow
 fi
 }
 
-download_update(){
-clear
-echo
-echo "A new version of the script was found..."
-echo
-echo "Want download it? (Y/N)"
-echo
-echo -ne "> "
-read download_update_opt
-case $download_update_opt in
-y|Y) download_update_apply;;
-n|N) safe_exit;;
-*) echo "Write Y or N and press enter..." && download_update;;
+dow(){
+$cl
+$ec
+$ec "A new version of the script was found..."
+$ec
+$ec "Want download it? (Y/N)"
+$ec
+$ec -ne "> "
+read dowo
+case $dowo in
+y|Y) dowa;;
+n|N) saf;;
+*) $ec "Write Y or N and press enter..." && dow;;
 esac
 }
 
-download_update_apply(){
-clear
-echo
-echo "Downloading..."
-sleep 1
-am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $download > /dev/null 2>&1
-clear
-am start -a android.intent.action.MAIN -n jackpal.androidterm/.Term > /dev/null 2>&1
-clear
-install_update
+dowa(){
+$cl
+$ec
+$ec "Downloading..."
+$sl
+$am.VIEW -n com.android.browser/.BrowserActivity $download $null
+$am.MAIN -n jackpal.androidterm/.Term $null
+$cl
+ins
 }
 
-install_update(){
+ins(){
 if [ -e $script ]; then
 am force-stop com.android.browser
-echo
-echo "Installing..."
+$ec
+$ec "Installing..."
 cp -f -r $script $source
 sleep 2
 chmod 777 $source$name
-echo
-echo "Done."
-sleep 1
-safe_exit
+$ec
+$ec "Done."
+$sl
+saf
 else
-wait_download
+wai
 fi
 }
 
-wait_download(){
-install_update
+wai(){
+ins
 }
 
-safe_exit(){
-rm -f -r $check
-rm -f -r $script
-$ro
-clear
+saf(){
+$rm $check
+$rm $script
+mount -o remount ro /system
+$cl
 $SHELL -c $source$name
 exit
 }
 
 #Start
-clear
+$cl
 var
-$rw
-check_update
+mount -o remount rw /system
+che
