@@ -1,25 +1,26 @@
 # Android-Script-Auto-updater
 
-How to use
+[B][U][SIZE="5"]How to[/SIZE][/U][/B]
 
-Add this line on the top of your script (if not have):
+[URL="https://play.google.com/store/apps/details?id=jackpal.androidterm"]Android Terminal Emulator (recommended)[/URL]
 
-ver="VERSION_OF_YOUR_SCRIPT"
+1. Download SH-OTA (down)
 
-And after the lines of the file of this repository called "Your Script".
+2. Edit SH-OTA file
+2.1. Put the name of your own script, example:
+[CODE]name="myscript.sh"[/CODE]
+2.2. Put the latest version of your own script, example:
+[CODE]version="1.0_stable"[/CODE]
+2.3. Put the location of your own script, example:
+[CODE]source="/system/xbin/"[/CODE]
+2.4. Put the link of the latest version of your own script, example:
+[CODE]download="https://www.mysite.com/myscript.sh"[/CODE]
 
-In this script add the version of your script in {version=""}, if you have it:
+3. Edit your own script
+3.1. Add the content of Your-Script.sh in the top of your own script
 
-ver=1.0_ilikebigbutts_stable
+3.2. Put the link of your modified SH-OTA file, example:
+[CODE]name="http://www.mysite.com/check.update[/CODE]
 
-Then add in this script like:
-
-version="1.0_ilikebigbutts_stable"
-
-Add on this script the download URL of your script on {download=""} like this:
-
-download="https://github.com/Bill-Gates/releases/download/69/Windows-69-Kamasutra-128-Bits-BlackRay18.iso"
-
-Can create a repository and use "Releases" to upload as this script as your script with the same tag always.
-
-When update your script, delete the old release and modify the {version""} of this script and in your script too and upload with the same tag that before.
+4. Upload SH-OTA file
+4.1. Upload to the same site as you put in the file as [download="...]
