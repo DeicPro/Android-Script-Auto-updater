@@ -1,18 +1,22 @@
-#Android Script Auto-updater v1.1 By Deic
+#SH-OTA v1.2 By Deic & DiamondBond
 
-#functions
-name="your.script" #Name of your script file
+#Variables
+var(){
+name="Your-Script.sh" #Name of your script file
 version="1.0_stable" #Version of your script
 source="/system/xbin/" #Source of your script
-download="http://www.yoursite.com/your.script" #URL to download your script
-check="$EXTERNAL_STORAGE/Download/check.update"
+download="https://www.YourSite.com/Your-Script.sh" #URL to download your script
+check="$EXTERNAL_STORAGE/Download/SH-OTA.sh"
 script="$EXTERNAL_STORAGE/Download/$name"
+rw="mount -o remount rw /system"
+ro="mount -o remount ro /system"
+}
 
 check_update(){
 echo
 echo "Checking updates..."
 sleep 1
-if [ "`grep $version $source/$name`" ]; then
+if [ grep $version $source/$name > /dev/null 2>&1 ]; then
 clear
 rm -f -r $check
 echo
@@ -45,9 +49,9 @@ clear
 echo
 echo "Downloading..."
 sleep 1
-am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $download
+am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $download > /dev/null 2>&1
 clear
-am start -a android.intent.action.MAIN -n jackpal.androidterm/.Term
+am start -a android.intent.action.MAIN -n jackpal.androidterm/.Term > /dev/null 2>&1
 clear
 install_update
 }
@@ -63,7 +67,7 @@ chmod 777 $source$name
 echo
 echo "Done."
 sleep 1
-$SHELL -c $source$name
+safe_exit
 else
 wait_download
 fi
@@ -76,12 +80,14 @@ install_update
 safe_exit(){
 rm -f -r $check
 rm -f -r $script
-mount -o remount ro /system
+$ro
 clear
+$SHELL -c $source$name
 exit
 }
 
-#start
+#Start
 clear
-mount -o remount rw /system
+var
+$rw
 check_update
