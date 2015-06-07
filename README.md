@@ -8,6 +8,7 @@ https://play.google.com/store/apps/details?id=jackpal.androidterm
 2. Download SH-OTA.sh
 
 3. Edit SH-OTA file
+
 3.1. Put the name of your own script, example:
 name="myscript.sh"
 3.2. Put the latest version of your own script, example:
