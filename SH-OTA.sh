@@ -5,7 +5,7 @@ var(){
 name="Your-Script.sh" #Name of your script file
 version="1.0_stable" #Version of your script
 source="/system/xbin/" #Source of your script
-download="https://www.YourSite.com/Your-Script.sh" #URL to download your script
+download="https://www.Your-Site.com/Your-Script.sh" #URL to download your script
 check="$EXTERNAL_STORAGE/Download/SH-OTA.sh"
 script="$EXTERNAL_STORAGE/Download/$name"
 rw="mount -o remount rw /system"
