@@ -1,7 +1,3 @@
-#SH-OTA
-
-	A stuff to auto-update your script
-
 #How to
 
 #1• Download Android Terminal Emulator:
