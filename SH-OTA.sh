@@ -16,7 +16,7 @@ cl="clear"
 am=`am start -a android.intent.action`
 }
 
-che(){
+a1(){
 $ec
 $ec "Checking updates..."
 $sl
@@ -26,13 +26,13 @@ $rm $check
 $ec
 $ec "You have the latest version."
 $sl
-saf
+a6
 else
-dow
+a2
 fi
 }
 
-dow(){
+a2(){
 $cl
 $ec
 $ec "A new version of the script was found..."
@@ -40,15 +40,15 @@ $ec
 $ec "Want download it? (Y/N)"
 $ec
 $ec -ne "> "
-read dowo
-case $dowo in
-y|Y) dowa;;
-n|N) saf;;
-*) $ec "Write Y or N and press enter..." && dow;;
+read op
+case $op in
+y|Y) a3;;
+n|N) a6;;
+*) $ec "Write Y or N and press enter..." && a2;;
 esac
 }
 
-dowa(){
+a3(){
 $cl
 $ec
 $ec "Downloading..."
@@ -56,10 +56,10 @@ $sl
 $am.VIEW -n com.android.browser/.BrowserActivity $download $null
 $am.MAIN -n jackpal.androidterm/.Term $null
 $cl
-ins
+a4
 }
 
-ins(){
+a4(){
 if [ -e $script ]; then
 am force-stop com.android.browser
 $ec
@@ -70,17 +70,17 @@ chmod 777 $source$name
 $ec
 $ec "Done."
 $sl
-saf
+a6
 else
-wai
+a5
 fi
 }
 
-wai(){
-ins
+a5(){
+a4
 }
 
-saf(){
+a6(){
 $rm $check
 $rm $script
 mount -o remount ro /system
@@ -93,4 +93,4 @@ exit
 $cl
 var
 mount -o remount rw /system
-che
+a1
