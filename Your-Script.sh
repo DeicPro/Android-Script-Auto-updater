@@ -3,11 +3,11 @@
 
 #Variables
 var(){
-#Edit this:
-#Version of your script = 1.0_stable
+	#Edit this:
+	#Version of your script = 1.0_stable
 	name="SH-OTA.sh"
 	download="https://www.Your-Site/SH-OTA.sh"
-#Don't edit:
+	#Don't edit:
 	check="$EXTERNAL_STORAGE/Download/$name"
 }
 
