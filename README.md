@@ -11,6 +11,8 @@ https://play.google.com/store/apps/details?id=jackpal.androidterm
 
 #2• Download SH-OTA.sh
 
+https://github.com/DeicPro/SH-OTA/releases/download/v1.1/check.update
+
 
 #3• Edit SH-OTA file
 
@@ -34,6 +36,9 @@ download="https://www.Your-Site.com/Your-Script.sh"
 #4• Edit your own script
 
 4.1• Add the content of Your-Script.sh in the top of your own script
+
+https://github.com/DeicPro/SH-OTA/releases/download/v1.1/your.script
+
 
 4.2• Put the link of your modified SH-OTA file, example:
 
