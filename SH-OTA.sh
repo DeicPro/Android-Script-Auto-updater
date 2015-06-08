@@ -16,6 +16,15 @@ cl="clear"
 am=`am start -a android.intent.action`
 }
 
+a6(){
+$rm $check
+$rm $script
+mount -o remount ro /system
+$cl
+$SHELL -c $source$name
+exit
+}
+
 a1(){
 $ec
 $ec "Checking updates..."
@@ -59,6 +68,10 @@ $cl
 a4
 }
 
+a5(){
+a4
+}
+
 a4(){
 if [ -e $script ]; then
 am force-stop com.android.browser
@@ -74,19 +87,6 @@ a6
 else
 a5
 fi
-}
-
-a5(){
-a4
-}
-
-a6(){
-$rm $check
-$rm $script
-mount -o remount ro /system
-$cl
-$SHELL -c $source$name
-exit
 }
 
 #Start
