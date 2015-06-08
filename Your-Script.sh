@@ -2,7 +2,7 @@
 #Put this lines in the top of your script
 
 #Variables
-var(){
+a1(){
 #From here edit
 	#Version of your script = "1.0_stable" <---- IMPORTANT
 	na="SH-OTA.sh" #Name of your SH-OTA file
@@ -13,18 +13,20 @@ var(){
 	am=`am start -a android.intent.action`
 }
 
-a1(){
+#Download SH-OTA file
+a2(){
 	$am.VIEW -n $br/.BrowserActivity $download >/dev/null 2>&1
 	$am.MAIN -n jackpal.androidterm/.Term >/dev/null 2>&1
-	a2
+	a3
 }
 
-
+#Wait download
 a3(){
-	a2
+	a4
 }
 
-a2(){
+#Run SH-OTA file
+a4(){
 	if [ -e $ch ]; then
 		am force-stop $br
 		$SHELL -c $ch
@@ -33,7 +35,7 @@ a2(){
 	fi
 }
 
-#Start
+#Script start
 clear
-var
 a1
+a2
