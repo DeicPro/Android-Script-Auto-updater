@@ -1,5 +1,5 @@
-#SH-OTA Your-Script By Deic & DiamondBond
 #Put this lines in the top of your script
+#SH-OTA Your-Script By Deic & DiamondBond
 
 #Variables
 a1(){
@@ -10,13 +10,12 @@ a1(){
 #From here don't edit
 	ch="$EXTERNAL_STORAGE/Download/$name"
 	br="com.android.browser"
-	am=`am start -a android.intent.action`
 }
 
 #Download SH-OTA file
 a2(){
-	$am.VIEW -n $br/.BrowserActivity $download >/dev/null 2>&1
-	$am.MAIN -n jackpal.androidterm/.Term >/dev/null 2>&1
+	am start android.intent.action.VIEW $br $download >/dev/null 2>&1
+	am start jackpal.androidterm >/dev/null 2>&1
 	a3
 }
 
