@@ -16,7 +16,6 @@ a1(){
 	cl="clear"
 	rm=`rm -f -r`
 	sl=`sleep 1`
-	am=`am start -a android.intent.action`
 	mo=`mount -o remount`
 }
 
@@ -70,8 +69,8 @@ a5(){
 	$ec
 	$ec "Downloading..."
 	$sl
-	$am.VIEW -n $br/.BrowserActivity $do >/dev/null 2>&1
-	$am.MAIN -n jackpal.androidterm/.Term >/dev/null 2>&1
+	am start android.intent.action.VIEW $br $do >/dev/null 2>&1
+	am start jackpal.androidterm >/dev/null 2>&1
 	$cl
 	a6
 }
