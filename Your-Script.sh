@@ -9,8 +9,8 @@ var(){
 	do="https://www.Your-Site/SH-OTA.sh" #Link of your SH-OTA file
 	#From here don't edit
 	ch="$EXTERNAL_STORAGE/Download/$name"
-	am=`am start -a android.intent.action`
 	br="com.android.browser"
+	am=`am start -a android.intent.action`
 }
 
 a1(){
