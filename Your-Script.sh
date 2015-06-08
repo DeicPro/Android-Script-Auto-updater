@@ -3,11 +3,11 @@
 
 #Variables
 var(){
-	#From here edit
+#From here edit
 	#Version of your script = "1.0_stable" <---- IMPORTANT
 	na="SH-OTA.sh" #Name of your SH-OTA file
 	do="https://www.Your-Site/SH-OTA.sh" #Link of your SH-OTA file
-	#From here don't edit
+#From here don't edit
 	ch="$EXTERNAL_STORAGE/Download/$name"
 	br="com.android.browser"
 	am=`am start -a android.intent.action`
