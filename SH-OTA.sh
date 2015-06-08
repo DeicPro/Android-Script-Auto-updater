@@ -1,14 +1,15 @@
 #SH-OTA By Deic & DiamondBond
 
 #Variables
-var(){
-	#From here edit
+a1(){
+#From here edit
 	na="Your-Script.sh" #Name of your script file
 	ve="1.0_stable" #Version of your script
-	so="/system/xbin/" #Source of your script
-	do="https://www.Your-Site.com/Your-Script.sh" #URL to download your script
-	#From here don't edit
-	ch="$EXTERNAL_STORAGE/Download/SH-OTA.sh"
+	so="/system/xbin/" #Location of your script
+	do="https://www.Your-Site.com/Your-Script.sh" #Link of your script
+	ns="SH-OTA.sh" #Name of your SH-OTA file
+#From here don't edit
+	ch="$EXTERNAL_STORAGE/Download/$ns"
 	sc="$EXTERNAL_STORAGE/Download/$na"
 	br="com.android.browser"
 	ec="echo"
@@ -19,7 +20,8 @@ var(){
 	mo=`mount -o remount`
 }
 
-a6(){
+#Safe exit
+a2(){
 	$rm $ch
 	$rm $sc
 	$mo ro /system
@@ -28,7 +30,8 @@ a6(){
 	exit
 }
 
-a1(){
+#Check update
+a3(){
 	$ec
 	$ec "Checking updates..."
 	$sl
@@ -38,13 +41,14 @@ a1(){
 		$ec
 		$ec "You have the latest version."
 		$sl
-		a6
-	else
 		a2
+	else
+		a4
 	fi
 }
 
-a2(){
+#Ask download
+a4(){
 	$cl
 	$ec
 	$ec "A new version of the script was found..."
@@ -54,13 +58,14 @@ a2(){
 	$ec -ne "> "
 	read op
 	case $op in
-		y|Y) a3;;
-		n|N) a6;;
-		*) $ec "Write Y or N and press enter..." && a2;;
+		y|Y) a5;;
+		n|N) a2;;
+		*) $ec "Write Y or N and press enter..." && a4;;
 	esac
 }
 
-a3(){
+#Download update
+a5(){
 	$cl
 	$ec
 	$ec "Downloading..."
@@ -68,14 +73,16 @@ a3(){
 	$am.VIEW -n $br/.BrowserActivity $do >/dev/null 2>&1
 	$am.MAIN -n jackpal.androidterm/.Term >/dev/null 2>&1
 	$cl
-	a4
+	a6
 }
 
-a5(){
-	a4
+#Wait download
+a6(){
+	a7
 }
 
-a4(){
+#Install update
+a7(){
 	if [ -e $sc ]; then
 		am force-stop $br
 		$ec
@@ -86,14 +93,14 @@ a4(){
 		$ec
 		$ec "Done."
 		$sl
-		a6
+		a2
 	else
-		a5
+		a6
 	fi
 }
 
-#Start
+#Script start
 $cl
-var
-$mo rw /system
 a1
+$mo rw /system
+a3
