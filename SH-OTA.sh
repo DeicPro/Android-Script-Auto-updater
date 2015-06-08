@@ -2,10 +2,12 @@
 
 #Variables
 var(){
+	#From here edit
 	name="Your-Script.sh" #Name of your script file
 	version="1.0_stable" #Version of your script
 	source="/system/xbin/" #Source of your script
 	download="https://www.Your-Site.com/Your-Script.sh" #URL to download your script
+	#From here don't edit
 	check="$EXTERNAL_STORAGE/Download/SH-OTA.sh"
 	script="$EXTERNAL_STORAGE/Download/$name"
 	rm=`rm -f -r`
