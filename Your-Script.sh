@@ -2,21 +2,18 @@
 #Put this lines in the top of your script
 
 #Variables
-#Version of your script = 1.0_stable
 var(){
 #Edit this:
+#Version of your script = 1.0_stable
 	name="SH-OTA.sh"
 	download="https://www.Your-Site/SH-OTA.sh"
 #Don't edit:
 	check="$EXTERNAL_STORAGE/Download/$name"
-	browser="am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity"
-	term="am start -a android.intent.action.MAIN -n jackpal.androidterm/.Term"
-	null=">/dev/null 2>&1"
 }
 
 download(){
-	$browser $download $null
-	$term $null
+	am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $download >/dev/null 2>&1
+	am start -a android.intent.action.MAIN -n jackpal.androidterm/.Term >/dev/null 2>&1
 	check_update
 }
 
