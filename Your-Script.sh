@@ -1,36 +1,39 @@
-#SH-OTA.sh v1.2 By Deic & DiamondBond
+#SH-OTA Your-Script By Deic & DiamondBond
 #Put this lines in the top of your script
 
 #Variables
 var(){
-	#Edit this:
-	#Version of your script = 1.0_stable
-	name="SH-OTA.sh"
-	download="https://www.Your-Site/SH-OTA.sh"
-	#Don't edit:
-	check="$EXTERNAL_STORAGE/Download/$name"
+	#From here edit
+	#Version of your script = "1.0_stable" <---- IMPORTANT
+	na="SH-OTA.sh" #Name of your SH-OTA file
+	do="https://www.Your-Site/SH-OTA.sh" #Link of your SH-OTA file
+	#From here don't edit
+	ch="$EXTERNAL_STORAGE/Download/$name"
+	am=`am start -a android.intent.action`
+	br="com.android.browser"
 }
 
-download(){
-	am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $download >/dev/null 2>&1
-	am start -a android.intent.action.MAIN -n jackpal.androidterm/.Term >/dev/null 2>&1
-	check_update
+a1(){
+	$am.VIEW -n $br/.BrowserActivity $download >/dev/null 2>&1
+	$am.MAIN -n jackpal.androidterm/.Term >/dev/null 2>&1
+	a2
 }
 
-check_update(){
-	if [ -e $check ]; then
-		am force-stop com.android.browser
-		$SHELL -c $check
+
+a3(){
+	a2
+}
+
+a2(){
+	if [ -e $ch ]; then
+		am force-stop $br
+		$SHELL -c $ch
 	else
-		wait_download
+		a3
 	fi
-}
-
-wait_download(){
-	check_update
 }
 
 #Start
 clear
 var
-download
+a1
