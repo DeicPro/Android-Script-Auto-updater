@@ -14,7 +14,7 @@ a1(){
 	br="com.android.browser"
 	ec="echo"
 	cl="clear"
-	rm=`rm -f -r`
+	rm=`rm -rf`
 	sl=`sleep 1`
 	mo=`mount -o remount`
 }
