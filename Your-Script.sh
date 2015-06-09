@@ -1,5 +1,5 @@
 #Put this lines in the top of your script
-#SH-OTA Your-Script By Deic & DiamondBond
+#SH-OTA By Deic & DiamondBond
 
 #Variables
 a1(){
