@@ -8,7 +8,7 @@ https://play.google.com/store/apps/details?id=jackpal.androidterm
 
 https://github.com/DeicPro/SH-OTA/releases/download/v1.1/check.update
 
-#3• Download Your-Script.sh
+#3• Download Template.sh
 
 https://github.com/DeicPro/SH-OTA/releases/download/v1.1/your.script
 
@@ -16,7 +16,7 @@ https://github.com/DeicPro/SH-OTA/releases/download/v1.1/your.script
 
 4.1• Put the name of your script, example:
 
-	name="myscript.sh"
+	name="Your_Script.sh"
 
 4.2• Put the latest version of your script, example:
 
@@ -28,20 +28,20 @@ https://github.com/DeicPro/SH-OTA/releases/download/v1.1/your.script
 
 4.4• Put the link of the latest version of your script, example:
 
-	download="https://www.Your-Site.com/Your-Script.sh"
+	download="https://www.Your_Site.com/Your_Script.sh"
 
 #5• Edit your script
 
-5.1• Add the content of Your-Script.sh in the top of your script
+5.1• Add the content of Template.sh in the top of your script
 
 5.2• Put the link of your modified SH-OTA file, example:
 
-	download="https://www.Your-Site.com/SH-OTA.sh"
+	download="https://www.Your_Site.com/SH-OTA.sh"
 
 #6• Upload SH-OTA file
 
 6.1• Upload to the same site like you put in the file as:
 
-	download="https://www.Your-Site.com/SH-OTA.sh"
+	download="https://www.Your_Site.com/SH-OTA.sh"
 	
-	download="https://www.Your-Site.com/Your-Script.sh"
+	download="https://www.Your_Site.com/Your_Script.sh"
