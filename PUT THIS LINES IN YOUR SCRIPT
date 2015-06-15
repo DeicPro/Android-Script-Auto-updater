@@ -5,7 +5,7 @@ sh-ota(){
 	name="ota.sh"
 	cloud="https://ota.sh"
 
-	#Don't edit from this
+	#Don't edit from here
 	ota_ext="$EXTERNAL_STORAGE/Download/$name"
 	ota_tmp="/data/local/tmp/$name"
 
