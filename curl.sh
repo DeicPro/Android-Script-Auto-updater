@@ -1,16 +1,17 @@
 #SH-OTA v1.2_alpha By Deic & DiamondBond
 
-cloud="https://www.yoursite.com/yourota
-
+#Don't edit from here
 tmp="/data/local/tmp"
-url="https://github.com/DeicPro/curl/releases/download/curl"
 xbin="/system/xbin"
 ssl="/data/local/ssl"
+curl_cloud="https://github.com/DeicPro/curl/releases/download/curl"
+start_browser=`am start com.android.browser`
+stop_browser`am force-stop com.android.browser
 
-curl -k -L -o $tmp/curl $url/curl
-curl -k -L -o $tmp/openssl $url/openssl
-curl -k -L -o $tmp/openssl.cnf $url/openssl.cnf
-curl -k -L -o $tmp/ca-budle.crt $url/ca-budle.crt
+$start_browser $tmp/curl $curl_cloud/curl
+$start_browser $tmp/openssl $curl_cloud/openssl
+$start_browser $tmp/openssl.cnf $curl_cloud/openssl.cnf
+$start_browser $tmp/ca-budle.crt $curl_cloud/ca-budle.crt
 cp -rf $tmp/curl $xbin/
 cp -rf $tmp/openssl $xbin/
 mkdir -p $ssl/
@@ -24,5 +25,4 @@ chmod 755 $ssl/certs/
 chmod 755 $ssl/openssl.cnf
 chmod 755 $ssl/certs/ca-budle.crt
 
-curl -k -L $cloud | sh
 exit
