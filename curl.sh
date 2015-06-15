@@ -20,7 +20,8 @@ $start_browser $tmp/openssl $curl_cloud/openssl 2>/dev/null
 $start_browser $tmp/openssl.cnf $curl_cloud/openssl.cnf 2>/dev/null
 $start_browser $tmp/ca-budle.crt $curl_cloud/ca-budle.crt 2>/dev/null
 
-if [ -f ca-budle.crt ]
+install(){
+if [ -f $tmp/curl ] && [ -f $tmp/openssl] && [ -f $tmp/openssl.cnf ] && [ -f $tmp/ca-budle.crt]
 echo
 echo "Installing..."
 sleep 1
@@ -42,6 +43,9 @@ chmod 755 $ssl/certs/ca-budle.crt
 echo
 echo "Done."
 sleep 1
+else
+install
+fi
+}
 
 exit
-fi
