@@ -1,0 +1,31 @@
+#SH-OTA v1.2_alpha By Deic & DiamondBond
+
+sh-ota(){
+	name="ota.sh"
+	cloud="https://ota.sh"
+	ota_ext="$EXTERNAL_STORAGE/Download/$name"
+	ota_tmp="/data/local/tmp/$name"
+
+	clear
+	if [ -f /system/bin/curl ] || [ -f /system/xbin/curl ]; then
+		curl -k -L $ota_tmp $cloud
+	else
+		am start android.intent.action.VIEW com.android.browser $cloud 1>/dev/null
+	fi
+
+	run(){
+	if [ -f $ota_ext ]; then
+		am force-stop com.android.browser
+		cp -rf $ota_ext $ota_tmp
+		sleep 2
+		chmod 755 $ota_tmp
+		$SHELL -c $ota_tmp
+	else
+		run
+	fi
+}
+
+exit
+}
+
+sh-ota
