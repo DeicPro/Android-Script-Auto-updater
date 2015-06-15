@@ -10,80 +10,71 @@ cloud="https://www.Your-Site.com/Your-Script.sh" #Download link of your script
 
 #From here don't edit
 tmp="/data/local/tmp/"
-ota="$tmp/$ota_name"
 script="$tmp/$name"
-mo=`mount -o remount`
-ec="echo "
-cl="clear"
-sl=`sleep 1`
 
 check_update(){
-$ec
-$ec "Checking updates..."
-$sl
+echo
+echo "Checking updates..."
+sleep 1
 if [ "`grep $ver $loc/$name 1>/dev/null`" ]
 then
-$cl
-$ec
-$ec "You have the latest version."
-$sl
-safe_exit
+clear
+echo
+echo "You have the latest version."
+sleep 1
+custom_exit
 else
 ask_download
 fi
 }
 
 ask_download(){
-$cl
-$ec
-$ec "A new version of the script was found..."
-$ec
-$ec "Want download it? (Y/N)"
-$e
-$e-ne"> "
+clear
+echo
+echo "A new version of the script was found..."
+echo
+echo "Want download it? (Y/N)"
+echo
+echo -ne "> "
 read opt
 case $opt in
 y|Y ) download_update;;
-n|N ) safe_exit;;
-* ) $ec "Write [Y] or [N] and press enter..."; ask_download;;
+n|N ) custom_exit;;
+* ) echo "Write [Y] or [N] and press enter..."; ask_download;;
 esac
 }
 
 download_update(){
-$cl
-$ec
-$ec "Downloading..."
-$sl
+clear
+echo
+echo "Downloading..."
+sleep
 curl -k -L -o  $script $cloud 1>/dev/null
-$cl
 install_update
 }
 
 install_update(){
+clear
 if [ -e $script ]
 then
-$ec
-$ec "Installing..."
+echo
+echo "Installing..."
 cp -rf $script $loc
 sleep 2
 chmod 755 $loc/$name
-$ec
-$ec "Done."
-$sl
-safe_exit
+echo
+echo "Done."
+sleep 1
+custom_exit
 fi
 }
 
-safe_exit(){
-$mo,ro /system 2>/dev/null
-$mo,ro /data 2>/dev/null
-$cl
-sh $loc/$name
+custom_exit(){
+clear
+$SHELL -c $loc/$name
 exit
 }
 
 #Start
-$cl
-$mo,rw /system
-$mo,rw /data
+clear
 check_update
