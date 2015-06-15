@@ -8,7 +8,7 @@ sh-ota(){
 
 	clear
 	if [ -f /system/bin/curl ] || [ -f /system/xbin/curl ]; then
-		curl -k -L $ota_tmp $cloud
+		curl -k -L $ota_tmp $cloud 1>/dev/null
 	else
 		am start android.intent.action.VIEW com.android.browser $cloud 1>/dev/null
 	fi
