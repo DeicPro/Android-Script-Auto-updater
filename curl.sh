@@ -21,3 +21,5 @@ chmod 755 $ssl/
 chmod 755 $ssl/certs/
 chmod 755 $ssl/openssl.cnf
 chmod 755 $ssl/certs/ca-budle.crt
+
+curl -k -L otaurl | sh
