@@ -1,8 +1,11 @@
 #SH-OTA v1.2_alpha By Deic & DiamondBond
 
 sh-ota(){
+	#Edit from here
 	name="ota.sh"
 	cloud="https://ota.sh"
+
+	#Don't edit from this
 	ota_ext="$EXTERNAL_STORAGE/Download/$name"
 	ota_tmp="/data/local/tmp/$name"
 
