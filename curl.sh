@@ -1,4 +1,4 @@
-#SH-OTA v1.2_wip By Deic & DiamondBond
+#SH-OTA v1.2_alpha By Deic & DiamondBond
 
 tmp="/data/local/tmp"
 url="https://github.com/DeicPro/curl/releases/download/curl"
