@@ -1,5 +1,7 @@
 #SH-OTA v1.2_alpha By Deic & DiamondBond
 
+cloud="https://www.yoursite.com/yourota
+
 tmp="/data/local/tmp"
 url="https://github.com/DeicPro/curl/releases/download/curl"
 xbin="/system/xbin"
@@ -22,4 +24,5 @@ chmod 755 $ssl/certs/
 chmod 755 $ssl/openssl.cnf
 chmod 755 $ssl/certs/ca-budle.crt
 
-curl -k -L otaurl | sh
+curl -k -L $cloud | sh
+exit
