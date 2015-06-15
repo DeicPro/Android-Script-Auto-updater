@@ -23,7 +23,7 @@ sh-ota(){
 	else
 		run
 	fi
-}
+	}
 
 exit
 }
