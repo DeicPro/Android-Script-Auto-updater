@@ -1,9 +1,18 @@
-#SH-OTA v1.2_wip script
+#SH-OTA By Deic & DiamondBond
+
+#Variables
+
+#From here edit
+name="Your-Script.sh" #Name of your script file
+ver="1.0_stable" #Version of your script
+loc="/system/xbin/" #Location of your script
+cloud="https://www.Your-Site.com/Your-Script.sh" #Download link of your script
 ota_name="SH-OTA.sh" #Name of your SH-OTA file
 
 #From here don't edit
-ota="$EXTERNAL_STORAGE/Download/$ota_name"
-script="$EXTERNAL_STORAGE/Download/$name"
+tmp="/data/local/tmp/"
+ota="$tmp/$ota_name"
+script="$tmp/$name"
 ec="echo "
 cl="clear"
 rm=`rm -f`
@@ -48,7 +57,7 @@ $cl
 $ec
 $ec "Downloading..."
 $sl
-curl -k -L $cloud | sh 1>/dev/null
+curl -k -L -o  $script $cloud 1>/dev/null
 $cl
 install_update
 }
@@ -72,6 +81,7 @@ safe_exit(){
 $rm $ota
 $rm $script
 $mo,ro /system
+$mo,ro /data
 $cl
 $SHELL -c $loc/$name
 exit
@@ -80,4 +90,5 @@ exit
 #Start
 $cl
 $mo,rw /system
+$mo,rw /data
 check_update
