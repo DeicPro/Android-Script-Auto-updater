@@ -1,4 +1,4 @@
-#SH-OTA v1.2_W.I.P. By Deic & DiamondBond
+#SH-OTA v1.2_alpha By Deic & DiamondBond
 
 #Variables
 
@@ -9,19 +9,20 @@ loc="/system/xbin/" #Location of your script
 cloud="https://www.Your-Site.com/Your-Script.sh" #Download link of your script
 
 #From here don't edit
-tmp="/data/local/tmp/"
-script="$tmp/$name"
+script="/data/local/tmp/$name"
 
 check_update(){
 echo
 echo "Checking updates..."
 sleep 1
+
 if [ "`grep $ver $loc/$name 1>/dev/null`" ]
 then
 clear
 echo
 echo "You have the latest version."
 sleep 1
+
 custom_exit
 else
 ask_download
@@ -36,6 +37,7 @@ echo
 echo "Want download it? (Y/N)"
 echo
 echo -ne "> "
+
 read opt
 case $opt in
 y|Y ) download_update;;
@@ -48,8 +50,10 @@ download_update(){
 clear
 echo
 echo "Downloading..."
-sleep
+sleep 1
+
 curl -k -L -o  $script $cloud 1>/dev/null
+
 install_update
 }
 
@@ -59,13 +63,19 @@ if [ -e $script ]
 then
 echo
 echo "Installing..."
+sleep 1
+
 cp -rf $script $loc
-sleep 2
+
 chmod 755 $loc/$name
+
 echo
 echo "Done."
 sleep 1
+
 custom_exit
+else
+install_update
 fi
 }
 
