@@ -10,23 +10,35 @@ curl_ext="$EXTERNAL_STORAGE/Download/curl.sh"
 curl_tmp="/data/local/tmp/curl.sh"
 mount=`mount-o remount`
 
+clear
 $mount,rw /system
 $mount,rw /data
 
 if [ ! -f /system/bin/curl ] || [ ! -f /system/xbin/curl ]
 then
+echo
+echo "curl & openssl binaries don't found."
 am start com.android.browser $curl_cloud
-elif [ -f $curl_ext ]
+install
+else
+curl -k -L $ota_cloud | sh
+fi
+
+install(){
+clear
+if [ -f $curl_ext ]
 then
 am force-stop com.android.browser
 cp -rf $curl_ext $curl_tmp
 chmod 755 $curl_tmp
 $SHELL -c $curl_tmp
 else
-curl -k -L $ota_cloud | sh
+install
 fi
+}
 
 $mount,ro /system
 $mount,ro /data
 $SHELL -c $script
+
 exit
