@@ -1,4 +1,4 @@
-#SH-OTA By Deic & DiamondBond
+#SH-OTA v1.2_W.I.P. By Deic & DiamondBond
 
 #Variables
 
@@ -7,17 +7,15 @@ name="Your-Script.sh" #Name of your script file
 ver="1.0_stable" #Version of your script
 loc="/system/xbin/" #Location of your script
 cloud="https://www.Your-Site.com/Your-Script.sh" #Download link of your script
-ota_name="SH-OTA.sh" #Name of your SH-OTA file
 
 #From here don't edit
 tmp="/data/local/tmp/"
 ota="$tmp/$ota_name"
 script="$tmp/$name"
+mo=`mount -o remount`
 ec="echo "
 cl="clear"
-rm=`rm -f`
 sl=`sleep 1`
-mo=`mount -o remount`
 
 check_update(){
 $ec
@@ -26,7 +24,6 @@ $sl
 if [ "`grep $ver $loc/$name 1>/dev/null`" ]
 then
 $cl
-$rm $ota
 $ec
 $ec "You have the latest version."
 $sl
@@ -67,7 +64,7 @@ if [ -e $script ]
 then
 $ec
 $ec "Installing..."
-cp -f $script $loc
+cp -rf $script $loc
 sleep 2
 chmod 755 $loc/$name
 $ec
@@ -78,12 +75,10 @@ fi
 }
 
 safe_exit(){
-$rm $ota
-$rm $script
-$mo,ro /system
-$mo,ro /data
+$mo,ro /system 2>/dev/null
+$mo,ro /data 2>/dev/null
 $cl
-$SHELL -c $loc/$name
+sh $loc/$name
 exit
 }
 
