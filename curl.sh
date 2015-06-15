@@ -18,27 +18,27 @@ sleep 1
 
 $start_browser $tmp/openssl $curl_cloud/openssl 2>/dev/null
 $start_browser $tmp/openssl.cnf $curl_cloud/openssl.cnf 2>/dev/null
-$start_browser $tmp/ca-budle.crt $curl_cloud/ca-budle.crt 2>/dev/null
+$start_browser $tmp/ca-bundle.crt $curl_cloud/ca-budle.crt 2>/dev/null
 
 install(){
-if [ -f $tmp/curl ] && [ -f $tmp/openssl] && [ -f $tmp/openssl.cnf ] && [ -f $tmp/ca-budle.crt]
+if [ -f $tmp/curl ] && [ -f $tmp/openssl] && [ -f $tmp/openssl.cnf ] && [ -f $tmp/ca-bundle.crt]
 echo
 echo "Installing..."
 sleep 1
 
 am force-stop com.android.browser
-cp -rf $tmp/curl $xbin/
-cp -rf $tmp/openssl $xbin/
 mkdir -p $ssl/
 mkdir -p $ssl/certs/
+cp -rf $tmp/curl $xbin/
+cp -rf $tmp/openssl $xbin/
 cp -rf $tmp/openssl.cnf $ssl/
-cp -rf $tmp/ca-budle.crt $ssl/certs/
-chmod 755 $xbin/curl
-chmod 755 $xbin/openssl
+cp -rf $tmp/ca-bundle.crt $ssl/certs/
 chmod 755 $ssl/
 chmod 755 $ssl/certs/
+chmod 755 $xbin/curl
+chmod 755 $xbin/openssl
 chmod 755 $ssl/openssl.cnf
-chmod 755 $ssl/certs/ca-budle.crt
+chmod 755 $ssl/certs/ca-bundle.crt
 
 echo
 echo "Done."
