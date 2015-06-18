@@ -5,7 +5,7 @@ tmp="/data/local/tmp/"
 xbin="/system/xbin/"
 ssl="/data/local/ssl/"
 curl_cloud="https://github.com/DeicPro/Downloads/releases/curl/"
-start_browser=`am start -a android.intent.action.VIEW -n com.android.browser`
+start_browser=`am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity`
 
 echo
 echo "Downloading curl binary..."
