@@ -1,27 +1,31 @@
 #SH-OTA v1.2_alpha By Deic & DiamondBond
 
-#Don't edit from here
-tmp="/data/local/tmp/"
-xbin="/system/xbin/"
-ssl="/data/local/ssl/"
-curl_cloud="https://github.com/DeicPro/Downloads/releases/curl/"
-start_browser=`am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity`
+#Don't edit
+ext="$EXTERNAL_STORAGE/Download/"
+xbin="/system/xbin"
+ssl="/data/local/ssl"
+curl_cloud="https://github.com/DeicPro/Download/releases/download/curl"
+start_browser="am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity"
 
+download_curl(){
+#clear
 echo
 echo "Downloading curl binary..."
 sleep 1
 
-$start_browser $curl_cloud/curl >/dev/null 2>&1
+$start_browser $curl_cloud/curl.file #>/dev/null 2>&1
 echo
 echo "Downloading openssl binary..."
 sleep 1
 
-$start_browser $curl_cloud/openssl >/dev/null 2>&1
-$start_browser $curl_cloud/openssl.cnf >/dev/null 2>&1
-$start_browser $curl_cloud/ca-budle.crt >/dev/null 2>&1
+$start_browser $curl_cloud/openssl.file #>/dev/null 2>&1
+$start_browser $curl_cloud/openssl_cnf.file #>/dev/null 2>&1
+$start_browser $curl_cloud/ca-bundle_crt.file #>/dev/null 2>&1
+install_curl
+}
 
-install(){
-if [ -f $tmp/curl ] && [ -f $tmp/openssl] && [ -f $tmp/openssl.cnf ] && [ -f $tmp/ca-bundle.crt]; then
+install_curl(){
+if [ -f $ext/curl.file ] && [ -f $ext/openssl.file ] && [ -f $ext/openssl_cnf.file ] && [ -f $ext/ca-bundle_crt.file ]; then
 echo
 echo "Installing..."
 sleep 1
@@ -29,10 +33,14 @@ sleep 1
 am force-stop com.android.browser
 mkdir -p $ssl/
 mkdir -p $ssl/certs/
-cp -rf $tmp/curl $xbin/
-cp -rf $tmp/openssl $xbin/
-cp -rf $tmp/openssl.cnf $ssl/
-cp -rf $tmp/ca-bundle.crt $ssl/certs/
+cp -rf $ext/curl.file $xbin/curl
+cp -rf $ext/openssl.file $xbin/openssl
+cp -rf $ext/openssl_cnf.file $ssl/openssl.cnf
+cp -rf $ext/ca-bundle_crt.file $ssl/certs/ca-bundle.crt
+rm -rf $ext/curl.file
+rm -rf $ext/openssl.file
+rm -rf $ext/openssl_cnf.file
+rm -rf $ext/ca-bundle_crt.file
 chmod 755 $ssl/
 chmod 755 $ssl/certs/
 chmod 755 $xbin/curl
@@ -43,9 +51,11 @@ chmod 755 $ssl/certs/ca-bundle.crt
 echo
 echo "Done."
 sleep 1
+rm -rf /data/local/tmp/curl.sh
+exit
 else
-install
+install_curl
 fi
 }
 
-exit
+download_curl
