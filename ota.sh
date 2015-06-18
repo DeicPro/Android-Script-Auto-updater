@@ -3,42 +3,40 @@
 #Variables
 
 #From here edit
-name="Your-Script.sh" #Name of your script file
-ver="1.0_stable" #Version of your script
-loc="/system/xbin/" #Location of your script
-cloud="https://www.Your-Site.com/Your-Script.sh" #Download link of your script
+name="script" #Name of your script file
+version="version" #Version of your script
+location="location" #Location of your script
+script_cloud="https://yoursite/script" #Download link of your script
 
 #From here don't edit
 script="/data/local/tmp/$name"
 
 check_update(){
+#clear
 echo
 echo "Checking updates..."
 sleep 1
-
-if [ "`grep $ver $loc/$name >/dev/null 2>&1`" ]
-then
-clear
+if [ "`grep $version $location/$name`" ]; then
+#clear
 echo
 echo "You have the latest version."
 sleep 1
-
-custom_exit
+exit
 else
 ask_download
 fi
 }
 
 ask_download(){
-clear
+#clear
 echo
 echo "A new version of the script was found..."
 echo
 echo "Want download it? (Y/N)"
 echo
-echo -ne "> "
-read opt
-case $opt in
+echo -n "> "
+read ask_download_opt
+case $ask_download_opt in
 y|Y ) download_update;;
 n|N ) custom_exit;;
 * ) echo "Write [Y] or [N] and press enter..."; ask_download;;
@@ -46,31 +44,26 @@ esac
 }
 
 download_update(){
-clear
+#clear
 echo
 echo "Downloading..."
 sleep 1
-
-curl -k -L -o  $script $cloud >/dev/null 2>&1
-
+curl -k -L -o $script $script_cloud #>/dev/null 2>&1
 install_update
 }
 
 install_update(){
-clear
+#clear
 if [ -f $script ]; then
 echo
 echo "Installing..."
 sleep 1
-
-cp -rf $script $loc
-
-chmod 755 $loc/$name
-
+cp -rf $script $location
+rm -rf $script
+chmod 755 $location/$name
 echo
 echo "Done."
 sleep 1
-
 custom_exit
 else
 install_update
@@ -78,11 +71,11 @@ fi
 }
 
 custom_exit(){
-clear
-$SHELL -c $loc/$name
+#clear
+rm -rf /data/local/tmp/ota.sh
+$SHELL -c $location/$name
 exit
 }
 
 #Start
-clear
 check_update
