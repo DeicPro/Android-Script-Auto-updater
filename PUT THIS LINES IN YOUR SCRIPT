@@ -1,34 +1,39 @@
 #SH-OTA v1.2_alpha By Deic & DiamondBond
 
-sh-ota(){
 	#Edit from here
-	name="main.sh"
-	cloud="link to main.sh"
+	main_cloud="https://yoursite/main.sh"
 
 	#Don't edit from here
-	ota_ext="$EXTERNAL_STORAGE/Download/$name"
-	ota_tmp="/data/local/tmp/$name"
+	main_ext="$EXTERNAL_STORAGE/Download/main.sh"
+	main_tmp="/data/local/tmp/main.sh"
 
-	clear
+sh-ota(){
+run_main(){
+	#clear
 	if [ -f /system/bin/curl ] || [ -f /system/xbin/curl ]; then
-		curl -k -L $ota_tmp $cloud 1>/dev/null
+		curl -k -L -o $main_tmp $main_cloud #>/dev/null 2>&1
+chmod 755 $main_tmp
+$SHELL -c $main_tmp
 	else
-		am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $cloud >/dev/null 2>&1
+		am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $main_cloud #>/dev/null 2>&1
+run_main_old
 	fi
+}
 
-	run(){
-	if [ -f $ota_ext ]; then
+	run_main_old(){
+	if [ -f $main_ext ]; then
 		am force-stop com.android.browser
-		cp -rf $ota_ext $ota_tmp
+		cp -rf $main_ext $main_tmp
+rm -rf $main_ext
 		sleep 2
-		chmod 755 $ota_tmp
-		$SHELL -c $ota_tmp
+		chmod 755 $main_tmp
+		$SHELL -c $main_tmp
+exit
 	else
-		run
+		run_main_old
 	fi
 	}
 
-exit
+run_main
 }
-
 sh-ota
