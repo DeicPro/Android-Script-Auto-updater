@@ -13,7 +13,7 @@ sh-ota(){
 	if [ -f /system/bin/curl ] || [ -f /system/xbin/curl ]; then
 		curl -k -L $ota_tmp $cloud 1>/dev/null
 	else
-		am start android.intent.action.VIEW com.android.browser $cloud 1>/dev/null
+		am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $cloud >/dev/null 2>&1
 	fi
 
 	run(){
