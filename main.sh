@@ -14,20 +14,18 @@ clear
 $mount,rw /system
 $mount,rw /data
 
-if [ ! -f /system/bin/curl ] || [ ! -f /system/xbin/curl ]
-then
+if [ -f /system/bin/curl ] || [ -f /system/xbin/curl ]; then
+curl -k -L $ota_cloud | sh >/dev/null 2>&1
+else
 echo
 echo "curl & openssl binaries don't found."
-am start com.android.browser $curl_cloud
+am start -a com.android.browser/.BrowserActivity -n $curl_cloud >/dev/null 2>&1
 install
-else
-curl -k -L $ota_cloud | sh
 fi
 
 install(){
 clear
-if [ -f $curl_ext ]
-then
+if [ -f $curl_ext ]; then
 am force-stop com.android.browser
 cp -rf $curl_ext $curl_tmp
 chmod 755 $curl_tmp
