@@ -1,9 +1,9 @@
 #SH-OTA v1.2_alpha By Deic & DiamondBond
 
 #Don't edit from here
-tmp="/data/local/tmp"
-xbin="/system/xbin"
-ssl="/data/local/ssl"
+tmp="/data/local/tmp/"
+xbin="/system/xbin/"
+ssl="/data/local/ssl/"
 curl_cloud="https://github.com/DeicPro/curl/releases/download/curl"
 start_browser=`am start android.intent.actions.VIEW com.android.browser`
 
@@ -11,17 +11,17 @@ echo
 echo "Downloading curl binary..."
 sleep 1
 
-$start_browser $tmp/curl $curl_cloud/curl 2>/dev/null
+$start_browser $curl_cloud/curl 1>/dev/null
 echo
 echo "Downloading openssl binary..."
 sleep 1
 
-$start_browser $tmp/openssl $curl_cloud/openssl 2>/dev/null
-$start_browser $tmp/openssl.cnf $curl_cloud/openssl.cnf 2>/dev/null
-$start_browser $tmp/ca-bundle.crt $curl_cloud/ca-budle.crt 2>/dev/null
+$start_browser $curl_cloud/openssl 1>/dev/null
+$start_browser $curl_cloud/openssl.cnf 1>/dev/null
+$start_browser $curl_cloud/ca-budle.crt 1>/dev/null
 
 install(){
-if [ -f $tmp/curl ] && [ -f $tmp/openssl] && [ -f $tmp/openssl.cnf ] && [ -f $tmp/ca-bundle.crt]
+if [ -f $tmp/curl ] && [ -f $tmp/openssl] && [ -f $tmp/openssl.cnf ] && [ -f $tmp/ca-bundle.crt]; then
 echo
 echo "Installing..."
 sleep 1
