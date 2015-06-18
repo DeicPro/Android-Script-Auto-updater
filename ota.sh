@@ -16,7 +16,7 @@ echo
 echo "Checking updates..."
 sleep 1
 
-if [ "`grep $ver $loc/$name 1>/dev/null`" ]
+if [ "`grep $ver $loc/$name >/dev/null 2>&1`" ]
 then
 clear
 echo
@@ -37,7 +37,6 @@ echo
 echo "Want download it? (Y/N)"
 echo
 echo -ne "> "
-
 read opt
 case $opt in
 y|Y ) download_update;;
@@ -52,15 +51,14 @@ echo
 echo "Downloading..."
 sleep 1
 
-curl -k -L -o  $script $cloud 1>/dev/null
+curl -k -L -o  $script $cloud >/dev/null 2>&1
 
 install_update
 }
 
 install_update(){
 clear
-if [ -e $script ]
-then
+if [ -f $script ]; then
 echo
 echo "Installing..."
 sleep 1
