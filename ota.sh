@@ -12,12 +12,12 @@ script_cloud="https://yoursite/script" #Download link of your script
 script="/data/local/tmp/$name"
 
 check_update(){
-#clear
+clear
 echo
 echo "Checking updates..."
 sleep 1
-if [ "`grep $version $location/$name`" ]; then
-#clear
+if [ "`grep $version $location/$name >/dev/null 2>&1`" ]; then
+clear
 echo
 echo "You have the latest version."
 sleep 1
@@ -28,7 +28,7 @@ fi
 }
 
 ask_download(){
-#clear
+clear
 echo
 echo "A new version of the script was found..."
 echo
@@ -44,22 +44,22 @@ esac
 }
 
 download_update(){
-#clear
+clear
 echo
 echo "Downloading..."
 sleep 1
-curl -k -L -o $script $script_cloud #>/dev/null 2>&1
+curl -k -L -o $script $script_cloud >/dev/null 2>&1
 install_update
 }
 
 install_update(){
-#clear
+clear
 if [ -f $script ]; then
 echo
 echo "Installing..."
 sleep 1
-cp -rf $script $location
-rm -rf $script
+cp -f $script $location
+rm -f $script
 chmod 755 $location/$name
 echo
 echo "Done."
@@ -71,8 +71,8 @@ fi
 }
 
 custom_exit(){
-#clear
-rm -rf /data/local/tmp/ota.sh
+clear
+rm -f /data/local/tmp/ota.sh
 $SHELL -c $location/$name
 exit
 }
