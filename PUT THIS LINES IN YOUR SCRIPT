@@ -2,29 +2,56 @@ sh-ota(){
 #SH-OTA v1.2_alpha By Deic & DiamondBond
 
 	#Edit from here
-	main_cloud="https://yoursite/main.sh"
+	ota_cloud="https://yoursite/ota.sh"
+script="location/script"
+ota_cloud="https://yoursite/ota.sh"
 
 	#Don't edit from here
-	main_ext="$EXTERNAL_STORAGE/Download/main.sh"
-	main_tmp="/data/local/tmp/main.sh"
+	ota_ext="$EXTERNAL_STORAGE/Download/ota.sh"
+tmp="/data/local/tmp"
 
 	clear
-	if [ -f /system/xbin/curl ]; then
-		curl -k -L -o $main_tmp $main_cloud >/dev/null 2>&1
-		chmod 755 $main_tmp
-		$main_tmp
-	else
-		am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $main_cloud >/dev/null 2>&1
-		while true; do
-		if [ -f $main_ext ]; then
-			am force-stop com.android.browser
-			cp -f $main_ext $main_tmp
-			rm -f $main_ext
-			chmod 755 $main_tmp
-			$main_tmp
-			exit
-		fi
-		done
-	fi
+run_ota(){
+clear
+if [ -f /system/xbin/curl ]; then
+curl -k -L -o $tmp/ota.sh $ota_cloud >/dev/null 2>&1
+sleep 2
+chmod 755 $tmp/ota.sh
+$tmp/ota.sh
+safe_exit
+else
+echo
+echo "curl & openssl binaries don't found."
+am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $curl_cloud >/dev/null 2>&1
+install_curl
+fi
+}
+
+install_curl(){
+clear
+if [ -f $curl_ext ]; then
+am force-stop com.android.browser
+cp -f $curl_ext $tmp/curl.sh
+rm -f $curl_ext
+chmod 755 $tmp/curl.sh
+$tmp/curl.sh
+run_ota
+else
+install_curl
+fi
+}
+
+safe_exit(){
+rm -f $tmp/main.sh
+mount -o remount,ro /system
+mount -o remount,ro /data
+$SHELL -c $script
+exit
+}
+
+mount -o remount,rw /system
+mount -o remount,rw /data
+run_ota
+
 }
 sh-ota
