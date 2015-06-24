@@ -1,3 +1,4 @@
-#SH-OTA.sh v1.2_alpha By Deic
+#!/system/bin/sh
+#SH-OTA v1.2_alpha By Deic
 
 version="version"
