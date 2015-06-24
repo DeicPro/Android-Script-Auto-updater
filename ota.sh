@@ -22,7 +22,7 @@ echo
 echo "Installing..."
 sleep 1
 cp -f $tmp $script
-rm -f $script
+rm -f $tmp
 chmod 755 $script
 echo
 echo "Done."
@@ -57,4 +57,4 @@ n|N ) exit;;
 * ) echo "Write [Y] or [N] and press enter...";;
 esac
 done
-}
+
