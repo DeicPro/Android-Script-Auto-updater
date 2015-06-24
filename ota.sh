@@ -1,81 +1,60 @@
 #SH-OTA v1.2_alpha By Deic & DiamondBond
 
-#Variables
-
-#From here edit
+#Edit values
 name="script" #Name of your script file
 version="version" #Version of your script
 location="location" #Location of your script
-script_cloud="https://yoursite/script" #Download link of your script
+cloud="https://your_site.com/script" #Download link of your script
 
-#From here don't edit
-script="/data/local/tmp/$name"
+#Don't edit
+tmp="/data/local/tmp/$name"
+script="$location/$name"
 
-check_update(){
-clear
-echo
-echo "Checking updates..."
-sleep 1
-if [ "`grep $version $location/$name >/dev/null 2>&1`" ]; then
-clear
-echo
-echo "You have the latest version."
-sleep 1
-exit
-else
-ask_download
-fi
-}
-
-ask_download(){
-clear
-echo
-echo "A new version of the script was found..."
-echo
-echo "Want download it? (Y/N)"
-echo
-echo -n "> "
-read ask_download_opt
-case $ask_download_opt in
-y|Y ) download_update;;
-n|N ) custom_exit;;
-* ) echo "Write [Y] or [N] and press enter..."; ask_download;;
-esac
-}
-
-download_update(){
+install(){
 clear
 echo
 echo "Downloading..."
 sleep 1
-curl -k -L -o $script $script_cloud >/dev/null 2>&1
-install_update
-}
-
-install_update(){
-clear
-if [ -f $script ]; then
+curl -k -L -o $tmp $cloud >/dev/null 2>&1
+while true; do
+if [ -f $tmp ]; then
 echo
 echo "Installing..."
 sleep 1
-cp -f $script $location
+cp -f $tmp $script
 rm -f $script
-chmod 755 $location/$name
+chmod 755 $script
 echo
 echo "Done."
 sleep 1
-custom_exit
-else
-install_update
-fi
-}
-
-custom_exit(){
 clear
-rm -f /data/local/tmp/ota.sh
-$SHELL -c $location/$name
+$script
 exit
+fi
+done
 }
 
-#Start
-check_update
+clear
+echo "Checking updates..."
+sleep 1
+if [ "`grep $version $script >/dev/null 2>&1`" ]; then
+clear
+echo "You have the latest version."
+sleep 1
+exit
+fi
+while true; do
+clear
+echo "A new version of the script was found..."
+echo
+echo "Want install it? (Y/N)"
+echo
+echo -n "> "
+read install_ask_opt
+case $install_ask_opt in
+y|Y ) install;;
+n|N ) exit;;
+* ) echo "Write [Y] or [N] and press enter...";;
+esac
+done
+}
