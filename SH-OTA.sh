@@ -15,7 +15,6 @@ start_browser="am start -a android.intent.action.VIEW -n com.android.browser/.Br
 
 mount -o remount,rw /system; mount -o remount,rw /data
 
-download_curl(){
 clear
 if [ ! -f $xbin/curl ]; then
 echo "Curl binaries not found."; echo
@@ -26,7 +25,6 @@ $start_browser/openssl_cnf.file >/dev/null 2>&1; $start_browser/ca-bundle_crt.fi
 else
 download
 if
-}
 
 install_curl(){
 while true; do
