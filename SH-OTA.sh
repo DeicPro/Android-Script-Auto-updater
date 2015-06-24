@@ -75,7 +75,7 @@ break
 fi
 done
 
-while true; done
+while true; do
 if [ -f $tmp/$name ]; then
 echo
 echo "Installing..."
