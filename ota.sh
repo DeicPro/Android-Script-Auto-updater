@@ -1,4 +1,4 @@
-#SH-OTA v1.2_alpha By Deic & DiamondBond
+#SH-OTA v1.2_alpha By Deic
 
 #Edit values
 name="your_script.sh"
