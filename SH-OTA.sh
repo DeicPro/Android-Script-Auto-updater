@@ -5,15 +5,13 @@ sh-ota(){
 name="script"
 version="version"
 location="location"
-script_cloud="https://your_site.com/your_script.sh"
-ota_cloud="https://your_site.com/ota.sh"
+cloud="https://your_site.com/ota.sh"
 
-	#Don't edit from here
+#Don't edit from here
 ext="$EXTERNAL_STORAGE/Download"
 tmp="/data/local/tmp"
 xbin="/system/xbin"
 ssl="/data/local/ssl"
-script="$location/$script"
 curl_cloud="https://github.com/DeicPro/Download/releases/download/curl"
 start_browser="am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity"
 
@@ -43,14 +41,10 @@ sleep 1
 am force-stop com.android.browser
 mkdir -p $ssl/
 mkdir -p $ssl/certs/
-cp -f $ext/curl.file $xbin/curl
-cp -f $ext/openssl.file $xbin/openssl
-cp -f $ext/openssl_cnf.file $ssl/openssl.cnf
-cp -f $ext/ca-bundle_crt.file $ssl/certs/ca-bundle.crt
-rm -f $ext/curl.file
-rm -f $ext/openssl.file
-rm -f $ext/openssl_cnf.file
-rm -f $ext/ca-bundle_crt.file
+mv $ext/curl.file $xbin/curl
+mv $ext/openssl.file $xbin/openssl
+mv $ext/openssl_cnf.file $ssl/openssl.cnf
+mv $ext/ca-bundle_crt.file $ssl/certs/ca-bundle.crt
 chmod 755 $ssl/
 chmod 755 $ssl/certs/
 chmod 755 $xbin/curl
@@ -70,7 +64,7 @@ clear
 echo "Checking updates..."
 sleep 1
 
-curl -k -L -o $tmp/ota.sh $ota_cloud >/dev/null 2>&1
+curl -k -L -o $tmp/ota.sh $cloud >/dev/null 2>&1
 
 while true; do
 if [ -f $tmp/ota.sh ]; then
@@ -78,15 +72,17 @@ chmod 755 $tmp/ota.sh
 $tmp/ota.sh
 
 break
+fi
 done
-elif [ -f $tmp/$name ]; then
+
+while true; done
+if [ -f $tmp/$name ]; then
 echo
 echo "Installing..."
 sleep 1
 
-cp -f $tmp/$name $script
-rm -f $tmp/$name
-chmod 755 $script
+mv $tmp/$name $location/$name
+chmod 755 $location/$name
 
 echo
 echo "Done."
@@ -95,11 +91,12 @@ sleep 1
 mount -o remount,ro /system
 mount -o remount,ro /data
 
-$script
+$location/$name
 
 clear
 exit
 fi
+done
 fi
 }
 sh-ota
