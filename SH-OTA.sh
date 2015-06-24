@@ -2,9 +2,9 @@
 
 sh-ota(){
 #Edit from here
-name="script"
+name="your_script.sh"
 version="version"
-location="location"
+location="/system/xbin"
 cloud="https://your_site.com/ota.sh"
 
 #Don't edit from here
