@@ -1,22 +1,26 @@
 #How to
 
-#1• Download Android Terminal Emulator:
-
-https://play.google.com/store/apps/details?id=jackpal.androidterm
-
-#2• Download SH-OTA.sh
-
-https://github.com/DeicPro/SH-OTA/releases/download/v1.1/check.update
-
-#3• Download Template.sh
+#1• Download SH-OTA.sh
 
 https://github.com/DeicPro/SH-OTA/releases/download/v1.1/your.script
 
-#4• Edit SH-OTA file
+#2• Download ota.sh
+
+https://github.com/DeicPro/SH-OTA/releases/download/v1.1/check.update
+
+#3• Edit your script
+
+3.1• Add the content of SH-OTA.sh in the top of your script
+
+3.2• Put the link of your future modified ota.sh file, example:
+
+	download="https://www.your_site.com/ota.sh"
+
+#4• Edit ota.sh file
 
 4.1• Put the name of your script, example:
 
-	name="Your_Script.sh"
+	name="your_script.sh"
 
 4.2• Put the latest version of your script, example:
 
@@ -28,20 +32,12 @@ https://github.com/DeicPro/SH-OTA/releases/download/v1.1/your.script
 
 4.4• Put the link of the latest version of your script, example:
 
-	download="https://www.Your_Site.com/Your_Script.sh"
+	download="https://your_Site.com/your_script.sh"
 
-#5• Edit your script
+#5• Upload your script & ota.sh files
 
-5.1• Add the content of Template.sh in the top of your script
-
-5.2• Put the link of your modified SH-OTA file, example:
-
-	download="https://www.Your_Site.com/SH-OTA.sh"
-
-#6• Upload SH-OTA file
-
-6.1• Upload to the same site like you put in the file as:
-
-	download="https://www.Your_Site.com/SH-OTA.sh"
+5.1• Upload to the same site like you put in the file as:
 	
-	download="https://www.Your_Site.com/Your_Script.sh"
+	download="https://your_site.com/your_script.sh"
+
+	download="https://your_site.com/ota.sh"
