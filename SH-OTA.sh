@@ -63,17 +63,13 @@ while true; do
 if [ -f $tmp/ota.sh ]; then
 chmod 755 $tmp/ota.sh
 $tmp/ota.sh
-safe_exit
-fi
-done
-fi
-
-safe_exit(){
 rm -f $tmp/ota.sh
 mount -o remount,ro /system
 mount -o remount,ro /data
 $script
 exit
-}
+fi
+done
+fi
 }
 sh-ota
