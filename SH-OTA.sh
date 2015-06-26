@@ -26,7 +26,7 @@ fi
 if [ "$curl" == 1 ]; then
 while true; do
 if [ -f $ext/curl.file ] && [ -f $ext/openssl.file ]; then
-elif [ -f $ext/openssl_cnf.file ] && [ -f $ext/ca-bundle_crt.file ]; then
+if [ -f $ext/openssl_cnf.file ] && [ -f $ext/ca-bundle_crt.file ]; then
 clear; echo "Installing..."; sleep 1
 
 am force-stop com.android.browser; mkdir -p $ssl/; mkdir -p $ssl/certs/
@@ -38,6 +38,7 @@ chmod 755 $ssl/; chmod 755 $ssl/certs/; chmod 755 $xbin/curl
 chmod 755 $xbin/openssl; chmod 755 $ssl/openssl.cnf; chmod 755 $ssl/certs/ca-bundle.crt
 
 clear; echo "Installed."; sleep 1; break
+fi
 fi
 done
 fi
