@@ -230,7 +230,7 @@ fi
 clear
 echo "Checking updates..."
 sleep 1
-curl -klos $ota $cloud
+curl -k -L -o -s $ota $cloud
 
 while true; do
 	if [ -f $ota ]; then
