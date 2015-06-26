@@ -17,10 +17,10 @@ start_browser="am start -a android.intent.action.VIEW -n com.android.browser/.Br
 
 $mount_rw/system
 $mount_rw/data
-clear
 
 if [ ! -f $xbin/curl ]
 then
+clear
 echo "Curl binaries not found."
 sleep 1
 clear
