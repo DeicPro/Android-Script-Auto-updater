@@ -12,7 +12,7 @@ xbin="/system/xbin"
 ssl="/data/local/ssl"
 mount_rw="mount -o remount,rw "
 mount_ro="mount -o remount,ro "
-curl_cloud="https://github.com/DeicPro/Download/releases/download/curl"
+curl_cloud="http://goo.gl/ySH0bK"
 start_browser="am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $curl_cloud"
 
 $mount_rw/system
