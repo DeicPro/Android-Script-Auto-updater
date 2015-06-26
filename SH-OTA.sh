@@ -73,7 +73,7 @@ fi
 clear
 echo "Checking updates..."
 sleep 1
-curl -k -L -o $tmp/ota.sh $cloud >/dev/null 2>&1
+curl -klos $tmp/ota.sh $cloud >/dev/null 2>&1
 
 while true
 do
