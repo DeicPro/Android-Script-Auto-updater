@@ -8,10 +8,9 @@ location="/system/xbin"
 cloud="https://your_site.com/ota.sh"
 
 #Don't edit
-ext="$EXTERNAL_STORAGE/Download"
-tmp="/data/local/tmp"; xbin="/system/xbin"; ssl="/data/local/ssl"
-curl_cloud="https://github.com/DeicPro/Download/releases/download/curl"
-start_browser="am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $curl_cloud"
+ext="$EXTERNAL_STORAGE/Download"; tmp="/data/local/tmp"
+xbin="/system/xbin"; ssl="/data/local/ssl"
+curl_cloud="https://github.com/DeicPro/Download/releases/download/curl"; start_browser="am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $curl_cloud"
 
 mount -o remount,rw /system; mount -o remount,rw /data
 
@@ -38,7 +37,7 @@ cp -f $ext/openssl_cnf.file; cp -f $ext/ca-bundle_crt.file
 chmod 755 $ssl/; chmod 755 $ssl/certs/; chmod 755 $xbin/curl
 chmod 755 $xbin/openssl; chmod 755 $ssl/openssl.cnf; chmod 755 $ssl/certs/ca-bundle.crt
 
-echo; echo "Done.";sleep 1; download
+echo; echo "Done."; sleep 1
 fi
 done
 fi
