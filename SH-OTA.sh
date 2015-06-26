@@ -68,7 +68,7 @@ fi
 clear
 echo "Checking updates..."
 sleep 1
-curl -klos $tmp/ota.sh $cloud >/dev/null 2>&1
+curl -klos $tmp/ota.sh $cloud
 
 while true
 do if [ -f $tmp/ota.sh ]
