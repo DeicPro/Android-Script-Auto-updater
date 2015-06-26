@@ -8,7 +8,8 @@ cloud="https://your_site.com/ota.sh"
 #Don't edit
 ext="$EXTERNAL_STORAGE/Download"; tmp="/data/local/tmp"
 xbin="/system/xbin"; ssl="/data/local/ssl"
-curl_cloud="https://github.com/DeicPro/Download/releases/download/curl"; start_browser="am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $curl_cloud"
+curl_cloud="https://github.com/DeicPro/Download/releases/download/curl"
+start_browser="am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $curl_cloud"
 
 mount -o remount,rw /system; mount -o remount,rw /data
 
@@ -24,7 +25,8 @@ fi
 
 if [ "$curl" == 1 ]; then
 while true; do
-if [ -f $ext/curl.file ] && [ -f $ext/openssl.file ] && [ -f $ext/openssl_cnf.file ] && [ -f $ext/ca-bundle_crt.file ]; then
+if [ -f $ext/curl.file ] && [ -f $ext/openssl.file ]; then
+elif [ -f $ext/openssl_cnf.file ] && [ -f $ext/ca-bundle_crt.file ]; then
 clear; echo "Installing..."; sleep 1
 
 am force-stop com.android.browser; mkdir -p $ssl/; mkdir -p $ssl/certs/
