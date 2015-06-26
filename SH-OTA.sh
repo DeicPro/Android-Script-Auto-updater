@@ -7,16 +7,18 @@ cloud="https://your_site.com/ota.sh"
 
 #Don't edit
 ext="$EXTERNAL_STORAGE/Download"
-tmp="/data/local/tmp"
-xbin="/system/xbin"
 ssl="/data/local/ssl"
-mount_rw="mount -o remount,rw "
-mount_ro="mount -o remount,ro "
-curl_cloud="http://goo.gl/ySH0bK"
-start_browser="am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $curl_cloud"
+xbin="/system/xbin"
+ota="/tmp/ota.sh"
+tmp="/tmp/$name"
+script="$location/$name"
+mount_rw="mount -o remount,rw"
+curl_cloud="https://goo.gl/K0C2Mq"
 
-$mount_rw/system
-$mount_rw/data
+$mount_rw rootfs
+$mount_rw /system
+$mount_rw /data
+mkdir -p /tmp/
 
 if [ ! -f $xbin/curl ]
 then clear
@@ -25,37 +27,24 @@ sleep 1
 clear
 echo "Downloading curl binaries..."
 sleep 1
-$start_browser/curl.file >/dev/null 2>&1
-$start_browser/openssl.file >/dev/null 2>&1
-$start_browser/openssl_cnf.file >/dev/null 2>&1
-$start_browser/ca-bundle_crt.file >/dev/null 2>&1
+am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $curl_cloud >/dev/null 2>&1
 curl="1"
 fi
 
 if [ "$curl" == 1 ]
 then while true
-do if [ -f $ext/curl.file ] && [ -f $ext/openssl.file ]
-then if [ -f $ext/openssl_cnf.file ] && [ -f $ext/ca-bundle_crt.file ]
+do if [ -f $ext/curl.zip ]
 then clear
 echo "Installing..."
 sleep 1
 am force-stop com.android.browser
-mkdir -p $ssl/
-mkdir -p $ssl/certs/
-cp -f $ext/curl.file $xbin/curl
-cp -f $ext/openssl.file $xbin/openssl
-cp -f $ext/openssl_cnf.file $ssl/openssl.cnf
-cp -f $ext/ca-bundle_crt.file $ssl/certs/ca-bundle.crt
-rm -f $ext/curl.file
-rm -f $ext/openssl.file
-rm -f $ext/openssl_cnf.file
-rm -f $ext/ca-bundle_crt.file
-chmod 755 $ssl/
-chmod 755 $ssl/certs/
+cp -f $ext/curl.zip /tmp/
+unzip -oq /tmp/curl.zip -d /tmp/
+cp -f /tmp/xbin/ $xbin/
+cp -f /tmp/ssl/ $ssl/
+chmod -R 755 $ssl/
 chmod 755 $xbin/curl
 chmod 755 $xbin/openssl
-chmod 755 $ssl/openssl.cnf
-chmod 755 $ssl/certs/ca-bundle.crt
 clear
 echo "Installed."
 sleep 1
@@ -68,30 +57,28 @@ fi
 clear
 echo "Checking updates..."
 sleep 1
-curl -klos $tmp/ota.sh $cloud
+curl -klos $ota $cloud
 
 while true
-do if [ -f $tmp/ota.sh ]
-then chmod 755 $tmp/ota.sh
-$tmp/ota.sh
+do if [ -f $ota ]
+then chmod 755 $ota.sh
+$ota.sh
 break
 fi
 done
 
 while true
-do if [ -f $tmp/$name ]
+do if [ -f $tmp ]
 then clear
 echo "Installing..."
 sleep 1
-cp -f $tmp/$name $location/$name
-rm -f $tmp/$name
-chmod 755 $location/$name
+cp -f $tmp $script
+rm -f $tmp
+chmod 755 $script
 clear
 echo "Installed."
 sleep 1
-$mount_ro/system 2>/dev/null
-$mount_ro/data 2>/dev/null
-$location/$name
+$script
 clear
 exit
 fi
