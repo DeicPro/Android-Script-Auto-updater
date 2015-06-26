@@ -7,19 +7,18 @@ cloud="https://your_site.com/ota.sh"
 
 #Don't edit
 ext="$EXTERNAL_STORAGE/Download"; tmp="/data/local/tmp"; xbin="/system/xbin"; ssl="/data/local/ssl"
-mount_rw="mount -o remount,rw "; mount_ro="mount -o remount,ro "; curl_cloud="https://github.com/DeicPro/Download/releases/download/curl"
+mount_rw="mount -o remount,rw "; mount_ro="mount -o remount,ro "
+curl_cloud="https://github.com/DeicPro/Download/releases/download/curl"
 start_browser="am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $curl_cloud"
 
 $mount_rw/system; $mount_rw/data
 
-clear
-if [ ! -f $xbin/curl ]; then
+clear; if [ ! -f $xbin/curl ]; then
 echo "Curl binaries not found."; echo
 clear; echo "Downloading curl binaries..."; sleep 1
 
 $start_browser/curl.file >/dev/null 2>&1; $start_browser/openssl.file >/dev/null 2>&1
-$start_browser/openssl_cnf.file >/dev/null 2>&1; $start_browser/ca-bundle_crt.file >/dev/null 2>&1
-curl="1"
+$start_browser/openssl_cnf.file >/dev/null 2>&1; $start_browser/ca-bundle_crt.file >/dev/null 2>&1; curl="1"
 fi
 
 if [ "$curl" == 1 ]; then
