@@ -8,8 +8,7 @@ cloud="https://your_site.com/your_script.sh"
 
 #Don't edit
 if [ "`grep $version $location/$name 2>/dev/null`" ]
-then
-clear
+then clear
 echo "You have the latest version."
 sleep 1
 exit
@@ -20,8 +19,7 @@ exit
 }
 
 while true
-do
-clear
+do clear
 echo "A new version of the script was found..."
 echo
 echo "Want install it? (Y/N)"
