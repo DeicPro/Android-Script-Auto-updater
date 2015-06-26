@@ -1,5 +1,12 @@
-#SH-OTA v1.2_alpha By Deic
+#SH-OTA v1.2_alpha By Deic & hoholee12
 
+#Edit values
+name="your_script.sh"
+version="version"
+location="/system/xbin"
+cloud="https://your_site.com/ota.sh"
+
+#Not edit
 # Busybox Applet Generator 2.4
 # You can type in any commands you would want it to check.
 # It will start by checking from cmd1, and its limit is up to cmd224.
@@ -154,31 +161,24 @@ bb_apg_2(){
 }
 bb_apg_2
 
-#Edit values
-s_name="your_script.sh"
-s_version="version"
-s_location="/system/xbin"
-s_cloud="https://your_site.com/ota.sh"
+mount_rw="mount -o remount,rw"
+info=/tmp/SH-OTA.info
+ext="$EXTERNAL_STORAGE/download/curl.zip"
+ssl="/data/local/ssl"
+certs="$ssl/certs/"
+xbin="/system/xbin"
+ota="/tmp/ota.sh"
+tmp="/tmp/$name"
+script="$location/$name"
 
-#Don't edit
-s_mount_rw="mount -o remount,rw"
-s_info=/tmp/SH-OTA.info
-s_ext="$EXTERNAL_STORAGE/download/curl.zip"
-s_ssl="/data/local/ssl"
-s_certs="$s_ssl/certs/"
-s_xbin="/system/xbin"
-s_ota="/tmp/ota.sh"
-s_tmp="/tmp/$s_name"
-s_script="$s_location/$s_name"
-
-$s_mount_rw rootfs
-$s_mount_rw /system
-$s_mount_rw /data
+$mount_rw rootfs
+$mount_rw /system
+$mount_rw /data
 mkdir -p /tmp/
 chmod 755 /tmp/
-touch $s_info
+touch $info
 
-if [ ! -f $s_xbin/curl ];then
+if [ ! -f $xbin/curl ]; then
 	clear
 	echo "Curl binaries not found."
 	sleep 1
@@ -186,39 +186,39 @@ if [ ! -f $s_xbin/curl ];then
 	echo "Downloading curl binaries..."
 	sleep 1
 	am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity https://github.com/DeicPro/Download/releases/download/curl/curl.zip >/dev/null 2>&1
-	s_curl="1"
+	curl="1"
 fi
 
-if [ "$s_curl" == 1 ]; then
+if [ "$curl" == 1 ]; then
 	while true; do
-		if [ -f $s_ext ]; then
+		if [ -f $ext ]; then
 			kill -9 $(pgrep com.android.browser)
-			#clear
+			clear
 			echo "Installing..."
 			sleep 1
-			unzip -oq $s_ext -d /tmp/
+			unzip -oq $ext -d /tmp/
 			break
 		fi
 	done
 
 	while true; do
 		if [ -f /tmp/curl ] && [ -f /tmp/openssl/ ] && [ -f /tmp/openssl.cnf ] && [ -f /tmp/ca-bundle.crt ]; then
-			mkdir $s_ssl/
-			mkdir $s_certs/
-			cp -f /tmp/curl $s_xbin/
-			cp -f /tmp/openssl $s_xbin/
-			cp -f /tmp/openssl.cnf $s_ssl/
-			cp -f /tmp/ca-bundle.crt $s_certs/
-			chmod 755 $s_xbin/curl
-			chmod 755 $s_xbin/openssl
-			chmod -R 755 $s_ssl/
-			rm -f $s_ext
+			mkdir $ssl/
+			mkdir $certs/
+			cp -f /tmp/curl $xbin/
+			cp -f /tmp/openssl $xbin/
+			cp -f /tmp/openssl.cnf $ssl/
+			cp -f /tmp/ca-bundle.crt $certs/
+			chmod 755 $xbin/curl
+			chmod 755 $xbin/openssl
+			chmod -R 755 $ssl/
+			rm -f $ext
 			break
 		fi
 	done
 
 	while true; do
-		if [ -f $s_xbin/curl ] && [ -f $s_xbin/openssl ] && [ -d $s_ssl/ ]; then
+		if [ -f $xbin/curl ] && [ -f $xbin/openssl ] && [ -d $ssl/ ]; then
 			clear
 			echo "Installed."
 			sleep 1
@@ -230,32 +230,32 @@ fi
 clear
 echo "Checking updates..."
 sleep 1
-curl -klos $s_ota $s_cloud
+curl -klos $ota $cloud
 
 while true; do
-	if [ -f $s_ota ]; then
-		chmod 755 $s_ota
-		$s_ota
+	if [ -f $ota ]; then
+		chmod 755 $ota
+		$ota
 		break
 	fi
 done
 
 while true; do
-	if [ "`grep no $s_info`" ]; then
+	if [ "`grep no $info`" ]; then
 		break
 	fi
-	if [ "`grep yes $s_info`" ]; then
-		if [ -f $s_tmp ]; then
+	if [ "`grep yes $info`" ]; then
+		if [ -f $tmp ]; then
 			clear
 			echo "Installing..."
 			sleep 1
-			cp -f $s_tmp $s_script
-			rm -f $s_tmp
-			chmod 755 $s_script
+			cp -f $tmp $script
+			rm -f $tmp
+			chmod 755 $script
 			clear
 			echo "Installed."
 			sleep 1
-			$s_script
+			$script
 			clear
 			exit
 		fi
