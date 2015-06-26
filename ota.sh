@@ -15,6 +15,10 @@ sleep 1
 exit
 fi
 
+go_exit(){
+exit
+}
+
 while true
 do
 clear
@@ -26,7 +30,7 @@ echo -n "> "
 read install_opt
 case $install_opt in
 y|Y ) break;;
-n|N ) exit;;
+n|N ) go_exit;;
 * ) echo "Write [Y] or [N] and press enter..."
 sleep 1;;
 esac
@@ -36,5 +40,5 @@ clear
 echo "Downloading..."
 sleep 1
 
-curl -kLo /data/local/tmp/$name $cloud >/dev/null 2>&1
+curl -kLos /data/local/tmp/$name $cloud
 exit
