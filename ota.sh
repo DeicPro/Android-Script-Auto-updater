@@ -38,5 +38,5 @@ clear
 echo "Downloading..."
 sleep 1
 
-curl -kLos /data/local/tmp/$name $cloud
+curl -kLos /tmp/$name $cloud
 exit
