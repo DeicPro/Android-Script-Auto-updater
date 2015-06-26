@@ -43,7 +43,7 @@ fi
 done
 fi
 
-if [ ! "$curl" ]
+if [ ! "$curl" ]; then
 clear; echo "Checking updates..."; sleep 1
 
 curl -k -L -o $tmp/ota.sh $cloud >/dev/null 2>&1
