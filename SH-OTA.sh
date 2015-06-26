@@ -10,8 +10,10 @@ ext="$EXTERNAL_STORAGE/Download"; tmp="/data/local/tmp"
 xbin="/system/xbin"; ssl="/data/local/ssl"
 curl_cloud="https://github.com/DeicPro/Download/releases/download/curl"
 start_browser="am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $curl_cloud"
+mount_rw="mount -o remount,rw "
+mount_ro="mount -o remount,ro "
 
-mount -o remount,rw /system; mount -o remount,rw /data
+$mount_rw/system; $mount_rw/data
 
 clear
 if [ ! -f $xbin/curl ]; then
@@ -46,7 +48,7 @@ fi
 if [ ! "$curl" ]; then
 clear; echo "Checking updates..."; sleep 1
 
-curl -k -L -o $tmp/ota.sh $cloud >/dev/null 2>&1
+curl -kLo $tmp/ota.sh $cloud >/dev/null 2>&1
 
 while true; do
 if [ -f $tmp/ota.sh ]; then
@@ -63,7 +65,7 @@ cp -f $tmp/$name $location/$name; rm -f $tmp/$name; chmod 755 $location/$name
 
 echo; echo "Installed."; sleep 1
 
-mount -o remount,ro /system 2>/dev/null; mount -o remount,ro /data 2>/dev/null
+$mount_ro/system 2>/dev/null; $mount_ro/data 2>/dev/null
 
 $location/$name; clear; exit
 fi
