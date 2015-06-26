@@ -22,7 +22,7 @@ clear; echo "Downloading curl binaries..."; sleep 1
 $start_browser/curl.file >/dev/null 2>&1; $start_browser/openssl.file >/dev/null 2>&1
 $start_browser/openssl_cnf.file >/dev/null 2>&1; $start_browser/ca-bundle_crt.file >/dev/null 2>&1
 curl="1"
-if
+fi
 
 if [ "$curl" == 1 ]; then
 while true; do
@@ -30,10 +30,10 @@ if [ -f $ext/curl.file ] && [ -f $ext/openssl.file ] && [ -f $ext/openssl_cnf.fi
 clear; echo; echo "Installing..."; sleep 1
 
 am force-stop com.android.browser; mkdir -p $ssl/; mkdir -p $ssl/certs/
-rm -f $ext/curl.file $xbin/curl; rm -f $ext/openssl.file $xbin/openssl
-rm -f $ext/openssl_cnf.file $ssl/openssl.cnf; rm -f $ext/ca-bundle_crt.file $ssl/certs/ca-bundle.crt
-cp -f $ext/curl.file; cp -f $ext/openssl.file
-cp -f $ext/openssl_cnf.file; cp -f $ext/ca-bundle_crt.file
+cp -f $ext/curl.file $xbin/curl; cp -f $ext/openssl.file $xbin/openssl
+cp -f $ext/openssl_cnf.file $ssl/openssl.cnf; cp -f $ext/ca-bundle_crt.file $ssl/certs/ca-bundle.crt
+rm -f $ext/curl.file; rm -f $ext/openssl.file
+rm -f $ext/openssl_cnf.file; rm -f $ext/ca-bundle_crt.file
 chmod 755 $ssl/; chmod 755 $ssl/certs/; chmod 755 $xbin/curl
 chmod 755 $xbin/openssl; chmod 755 $ssl/openssl.cnf; chmod 755 $ssl/certs/ca-bundle.crt
 
