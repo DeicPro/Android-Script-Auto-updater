@@ -6,10 +6,8 @@ location="/system/xbin"
 cloud="https://your_site.com/ota.sh"
 
 #Don't edit
-ext="$EXTERNAL_STORAGE/Download"; tmp="/data/local/tmp"
-xbin="/system/xbin"; ssl="/data/local/ssl"
-mount_rw="mount -o remount,rw "; mount_ro="mount -o remount,ro "
-curl_cloud="https://github.com/DeicPro/Download/releases/download/curl"
+ext="$EXTERNAL_STORAGE/Download"; tmp="/data/local/tmp"; xbin="/system/xbin"; ssl="/data/local/ssl"
+mount_rw="mount -o remount,rw "; mount_ro="mount -o remount,ro "; curl_cloud="https://github.com/DeicPro/Download/releases/download/curl"
 start_browser="am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $curl_cloud"
 
 $mount_rw/system; $mount_rw/data
