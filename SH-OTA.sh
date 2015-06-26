@@ -202,7 +202,7 @@ if [ "$curl" == 1 ]; then
 	done
 
 	while true; do
-		if [ -f /tmp/curl ] && [ -f /tmp/openssl/ ] && [ -f /tmp/openssl.cnf ] && [ -f /tmp/ca-bundle.crt ]; then
+		if [ -f /tmp/curl ] && [ -f /tmp/openssl ] && [ -f /tmp/openssl.cnf ] && [ -f /tmp/ca-bundle.crt ]; then
 			mkdir $ssl/
 			mkdir $certs/
 			cp -f /tmp/curl $xbin/
