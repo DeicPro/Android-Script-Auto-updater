@@ -7,16 +7,17 @@ location="/system/xbin"
 cloud="https://your_site.com/your_script.sh"
 
 #Don't edit
+custom_exit(){
+echo "no update" > /tmp/SH-OTA.info
+exit
+}
+
 if [ "`grep $version $location/$name 2>/dev/null`" ]
 then clear
 echo "You have the latest version."
 sleep 1
-exit
+custom_exit
 fi
-
-go_exit(){
-exit
-}
 
 while true
 do clear
@@ -27,8 +28,9 @@ echo
 echo -n "> "
 read install_opt
 case $install_opt in
-y|Y ) break;;
-n|N ) go_exit;;
+y|Y ) echo "update" > /tmp/SH-OTA.info
+break;;
+n|N ) custom_exit;;
 * ) echo "Write [Y] or [N] and press enter..."
 sleep 1;;
 esac
