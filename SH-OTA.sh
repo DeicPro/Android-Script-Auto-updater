@@ -7,13 +7,13 @@ cloud="https://your_site.com/ota.sh"
 
 #Don't edit
 ext="$EXTERNAL_STORAGE/Download"
+curlz="$ext/curl.zip"
 ssl="/data/local/ssl"
 xbin="/system/xbin"
 ota="/tmp/ota.sh"
 tmp="/tmp/$name"
 script="$location/$name"
 mount_rw="mount -o remount,rw"
-curl_cloud="https://goo.gl/K0C2Mq"
 
 $mount_rw rootfs
 $mount_rw /system
@@ -27,24 +27,24 @@ sleep 1
 clear
 echo "Downloading curl binaries..."
 sleep 1
-am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $curl_cloud >/dev/null 2>&1
+am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity https://goo.gl/K0C2Mq >/dev/null 2>&1
 curl="1"
 fi
 
 if [ "$curl" == 1 ]
 then while true
-do if [ -f $ext/curl.zip ]
+do if [ -f $curlz ]
 then clear
 echo "Installing..."
 sleep 1
 am force-stop com.android.browser
-cp -f $ext/curl.zip /tmp/
-unzip -oq /tmp/curl.zip -d /tmp/
+unzip -oq $curlz -d /tmp/
 cp -f /tmp/xbin/ $xbin/
 cp -f /tmp/ssl/ $ssl/
 chmod -R 755 $ssl/
 chmod 755 $xbin/curl
 chmod 755 $xbin/openssl
+rm -f $curlz
 clear
 echo "Installed."
 sleep 1
