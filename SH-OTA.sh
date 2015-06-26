@@ -50,7 +50,6 @@ echo "Installed."
 sleep 1
 break
 fi
-fi
 done
 fi
 
