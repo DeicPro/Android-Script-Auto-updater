@@ -8,7 +8,7 @@ cloud="https://your_site.com/your_script.sh"
 
 #Don't edit
 custom_exit(){
-echo "no update" > /tmp/SH-OTA.info
+echo "no" > /tmp/SH-OTA.info
 exit
 }
 
@@ -28,7 +28,7 @@ echo
 echo -n "> "
 read install_opt
 case $install_opt in
-y|Y ) echo "update" > /tmp/SH-OTA.info
+y|Y ) echo "yes" > /tmp/SH-OTA.info
 break;;
 n|N ) custom_exit;;
 * ) echo "Write [Y] or [N] and press enter..."
