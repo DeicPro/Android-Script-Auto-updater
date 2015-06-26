@@ -6,8 +6,7 @@ location="/system/xbin"
 cloud="https://your_site.com/ota.sh"
 
 #Don't edit
-ext="$EXTERNAL_STORAGE/Download"
-curlz="$ext/curl.zip"
+ext="$EXTERNAL_STORAGE/Download/curl.zip"
 ssl="/data/local/ssl"
 xbin="/system/xbin"
 ota="/tmp/ota.sh"
@@ -19,6 +18,7 @@ $mount_rw rootfs
 $mount_rw /system
 $mount_rw /data
 mkdir -p /tmp/
+chmod 755 /tmp/
 
 if [ ! -f $xbin/curl ]
 then clear
@@ -33,18 +33,18 @@ fi
 
 if [ "$curl" == 1 ]
 then while true
-do if [ -f $curlz ]
+do if [ -f $ext ]
 then clear
 echo "Installing..."
 sleep 1
 am force-stop com.android.browser
-unzip -oq $curlz -d /tmp/
+unzip -oq $ext -d /tmp/
 cp -f /tmp/xbin/ $xbin/
 cp -f /tmp/ssl/ $ssl/
 chmod -R 755 $ssl/
 chmod 755 $xbin/curl
 chmod 755 $xbin/openssl
-rm -f $curlz
+rm -f $ext
 clear
 echo "Installed."
 sleep 1
