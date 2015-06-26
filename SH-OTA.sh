@@ -70,12 +70,11 @@ fi
 done
 fi
 
-if [ ! "$curl" ]
-then
 clear
 echo "Checking updates..."
 sleep 1
-curl -kLo $tmp/ota.sh $cloud >/dev/null 2>&1
+curl -k -L -o $tmp/ota.sh $cloud >/dev/null 2>&1
+
 while true
 do
 if [ -f $tmp/ota.sh ]
@@ -85,7 +84,6 @@ $tmp/ota.sh
 break
 fi
 done
-fi
 
 while true
 do
