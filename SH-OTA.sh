@@ -1,6 +1,4 @@
-#SH-OTA v1.2_alpha By Deic
-
-sh-ota(){
+SH-OTA(){#v1.2_alpha By Deic
 #Edit values
 name="your_script.sh"
 version="version"
@@ -27,7 +25,7 @@ fi
 if [ "$curl" == 1 ]; then
 while true; do
 if [ -f $ext/curl.file ] && [ -f $ext/openssl.file ] && [ -f $ext/openssl_cnf.file ] && [ -f $ext/ca-bundle_crt.file ]; then
-clear; echo; echo "Installing..."; sleep 1
+clear; echo "Installing..."; sleep 1
 
 am force-stop com.android.browser; mkdir -p $ssl/; mkdir -p $ssl/certs/
 cp -f $ext/curl.file $xbin/curl; cp -f $ext/openssl.file $xbin/openssl
@@ -37,7 +35,7 @@ rm -f $ext/openssl_cnf.file; rm -f $ext/ca-bundle_crt.file
 chmod 755 $ssl/; chmod 755 $ssl/certs/; chmod 755 $xbin/curl
 chmod 755 $xbin/openssl; chmod 755 $ssl/openssl.cnf; chmod 755 $ssl/certs/ca-bundle.crt
 
-echo; echo "Done."; sleep 1
+clear; echo "Installed."; sleep 1; break
 fi
 done
 fi
@@ -69,4 +67,4 @@ fi
 done
 }
 
-sh-ota
+SH-OTA
