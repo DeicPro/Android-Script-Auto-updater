@@ -19,8 +19,7 @@ $mount_rw/system
 $mount_rw/data
 
 if [ ! -f $xbin/curl ]
-then
-clear
+then clear
 echo "Curl binaries not found."
 sleep 1
 clear
@@ -34,14 +33,10 @@ curl="1"
 fi
 
 if [ "$curl" == 1 ]
-then
-while true
-do
-if [ -f $ext/curl.file ] && [ -f $ext/openssl.file ]
-then
-if [ -f $ext/openssl_cnf.file ] && [ -f $ext/ca-bundle_crt.file ]
-then
-clear
+then while true
+do if [ -f $ext/curl.file ] && [ -f $ext/openssl.file ]
+then if [ -f $ext/openssl_cnf.file ] && [ -f $ext/ca-bundle_crt.file ]
+then clear
 echo "Installing..."
 sleep 1
 am force-stop com.android.browser
@@ -76,20 +71,16 @@ sleep 1
 curl -klos $tmp/ota.sh $cloud >/dev/null 2>&1
 
 while true
-do
-if [ -f $tmp/ota.sh ]
-then
-chmod 755 $tmp/ota.sh
+do if [ -f $tmp/ota.sh ]
+then chmod 755 $tmp/ota.sh
 $tmp/ota.sh
 break
 fi
 done
 
 while true
-do
-if [ -f $tmp/$name ]
-then
-clear
+do if [ -f $tmp/$name ]
+then clear
 echo "Installing..."
 sleep 1
 cp -f $tmp/$name $location/$name
