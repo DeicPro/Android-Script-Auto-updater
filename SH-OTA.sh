@@ -66,8 +66,13 @@ break
 fi
 done
 
-while true
-do if [ -f $tmp ]
+then while true
+do if [ "`grep no /tmp/SH-OTA.info`" ]
+then break
+fi
+
+if [ "`grep yes /tmp/SH-OTA.info`" ]
+then if [ -f $tmp ]
 then clear
 echo "Installing..."
 sleep 1
@@ -81,7 +86,5 @@ $script
 clear
 exit
 fi
+fi
 done
-}
-
-SH-OTA
