@@ -62,7 +62,7 @@ if [ "$curl" == 1 ]; then
 	done
 
 	while true; do
-		if [ -f $xbin/curl ] && [ -f $xbin/openssl ] && [ -d $ssl/ ]; then
+		if [ -f $xbin/curl ] && [ -f $xbin/openssl ] && [ -f $ssl/openssl.cnf ] && [ -f $certs/ca-bundle.crt ]; then
 			clear
 			echo "Installed."
 			sleep 1
