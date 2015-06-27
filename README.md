@@ -1,10 +1,10 @@
 How to
 -----------------------------------------------
 Download SH-OTA.sh
-
+-----------------------------------------------
 Coming soon...
 
-2• Download version.sh
+2. Download version.sh
 
 Coming soon...
 
