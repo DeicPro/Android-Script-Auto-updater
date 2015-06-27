@@ -10,9 +10,9 @@ Coming soon...
 
 3. Edit your script
 -----------------------------------------------
-* Add the code of SH-OTA.sh in your script
+	* Add the code of SH-OTA.sh in your script
 
-* Write the link of your future modified version.sh file, example:
+	* Write the link of your future modified version.sh file, example:
 
 	cloud="https://www.your_site.com/version.sh"
 
