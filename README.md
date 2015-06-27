@@ -1,6 +1,6 @@
-#How to
-
-1• Download SH-OTA.sh
+How to
+------
+Download SH-OTA.sh
 
 Coming soon...
 
