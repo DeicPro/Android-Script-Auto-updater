@@ -1,4 +1,4 @@
-#SH-OTA v1.2_alpha By Deic & hoholee12
+SH-OTA(){ #v1.2_alpha By Deic & hoholee12
 
 #Edit values
 name="your_script.sh"
@@ -178,7 +178,6 @@ mkdir -p /tmp/
 chmod 755 /tmp/
 touch $info
 
-
 if [ ! -f $xbin/curl ]; then
 	clear
 	echo "Curl binaries not found."
@@ -242,8 +241,10 @@ done
 
 while true; do
 	if [ "`grep no $info`" ]; then
+		rm -rf /tmp/
 		break
 	fi
+
 	if [ "`grep yes $info`" ]; then
 		if [ -f $tmp ]; then
 			clear
@@ -255,9 +256,13 @@ while true; do
 			clear
 			echo "Installed."
 			sleep 1
+			rm -rf /tmp/
 			$script
 			clear
 			exit
 		fi
 	fi
 done
+}
+
+SH-OTA
