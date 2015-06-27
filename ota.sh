@@ -10,7 +10,7 @@ echo "no" > /tmp/SH-OTA.info
 exit
 }
 
-if [ "`grep $version script_name 2>/dev/null`" ]; then
+if [ "`grep $version script_loc 2>/dev/null`" ]; then
 clear
 echo "You have the latest version."
 sleep 1
