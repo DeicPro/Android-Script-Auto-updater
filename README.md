@@ -1,4 +1,4 @@
-How to
+How to | lol
 ------
 Download SH-OTA.sh
 
