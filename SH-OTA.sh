@@ -100,7 +100,7 @@ echo "Want install it? (Y/N)"
 echo
 echo -n "> "
 read install_opt
-case $install_opt in
+case script_install in
 y|Y ) echo "yes" > /tmp/SH-OTA.info; break;;
 n|N ) custom_exit;;
 * ) echo "Write [Y] or [N] and press enter..."; sleep 1;;
@@ -110,10 +110,12 @@ done
 clear
 echo "Downloading..."
 sleep 1
-curl -k -L -o -s $tmp $cloud
+curl -k -L -o -s $tmp script_cloud
 exit
 EOF
 		sed -i 's/script_version/$version/' $ota
+		sed -i 's/script_install/$install_opt/' $ota
+		sed -i 's/script_cloud/$cloud/' $ota
 		$ota
 		break
 	fi
