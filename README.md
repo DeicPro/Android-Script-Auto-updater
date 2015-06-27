@@ -2,42 +2,34 @@
 
 #1• Download SH-OTA.sh
 
-https://github.com/DeicPro/SH-OTA/releases/download/v1.1/your.script
+Coming soon...
 
-#2• Download ota.sh
+#2• Download version.sh
 
-https://github.com/DeicPro/SH-OTA/releases/download/v1.1/check.update
+Coming soon...
 
 #3• Edit your script
 
-3.1• Add the content of SH-OTA.sh in the top of your script
+3.1• Add the code of SH-OTA.sh in your script
 
-3.2• Put the link of your future modified ota.sh file, example:
+3.2• Put the link of your future modified version.sh file, example:
 
-	download="https://www.your_site.com/ota.sh"
+	download="https://www.your_site.com/version.sh"
 
-#4• Edit ota.sh file
+#4• Edit version.sh file
 
-4.1• Put the name of your script, example:
-
-	name="your_script.sh"
-
-4.2• Put the latest version of your script, example:
+4.1• Put the latest version of your script, example:
 
 	version="1.0_stable"
 
-4.3• Put the location of your script, example:
+4.2• Put the link of the latest version of your script, example:
 
-	source="/system/xbin/"
+	download="https://your_site.com/your_script.sh"
 
-4.4• Put the link of the latest version of your script, example:
+#5• Upload your script & version.sh files
 
-	download="https://your_Site.com/your_script.sh"
-
-#5• Upload your script & ota.sh files
-
-5.1• Upload to the same site like you put in the file as:
+5.1• Upload to the same site like you write in the files:
 	
 	download="https://your_site.com/your_script.sh"
 
-	download="https://your_site.com/ota.sh"
+	download="https://your_site.com/version.sh"
