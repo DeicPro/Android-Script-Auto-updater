@@ -79,7 +79,41 @@ curl -k -L -o -s $ota $cloud
 while true; do
 	if [ -f $ota ]; then
 		chmod 755 $ota
-		sed -i 's/script_loc/`$0`/ $ota
+cat >> $ota <<EOF
+custom_exit(){
+echo "no" > /tmp/SH-OTA.info
+exit
+}
+
+if [ "`grep script_version $0 2>/dev/null`" ]; then
+clear
+echo "You have the latest version."
+sleep 1
+custom_exit
+fi
+
+while true; do
+clear
+echo "A new version of the script was found..."
+echo
+echo "Want install it? (Y/N)"
+echo
+echo -n "> "
+read install_opt
+case $install_opt in
+y|Y ) echo "yes" > /tmp/SH-OTA.info; break;;
+n|N ) custom_exit;;
+* ) echo "Write [Y] or [N] and press enter..."; sleep 1;;
+esac
+done
+
+clear
+echo "Downloading..."
+sleep 1
+curl -k -L -o -s $tmp $cloud
+exit
+EOF
+sed -i 's/script_version/$version/' $ota
 		$ota
 		break
 	fi
