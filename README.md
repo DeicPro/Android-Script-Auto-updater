@@ -1,15 +1,15 @@
-How to
+#How to
 -----------------------------------------------
-Download SH-OTA.sh
+1. Download SH-OTA.sh
 -----------------------------------------------
 Coming soon...
-
+-----------------------------------------------
 2. Download version.sh
-
+-----------------------------------------------
 Coming soon...
-
-3• Edit your script
-
+-----------------------------------------------
+3. Edit your script
+-----------------------------------------------
 3.1• Add the code of SH-OTA.sh in your script
 
 3.2• Write the link of your future modified version.sh file, example:
