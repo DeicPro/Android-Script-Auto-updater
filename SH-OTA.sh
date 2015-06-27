@@ -113,7 +113,7 @@ sleep 1
 curl -k -L -o -s $tmp $cloud
 exit
 EOF
-sed -i 's/script_version/$version/' $ota
+		sed -i 's/script_version/$version/' $ota
 		$ota
 		break
 	fi
