@@ -1,9 +1,7 @@
 #SH-OTA v1.2_alpha By Deic & hoholee12
 
 #Edit values
-name="your_script.sh"
 version="version"
-location="/system/xbin"
 cloud="https://your_site.com/your_script.sh"
 
 #Don't edit
@@ -12,7 +10,7 @@ echo "no" > /tmp/SH-OTA.info
 exit
 }
 
-if [ "`grep $version $location/$name 2>/dev/null`" ]; then
+if [ "`grep $version script_name 2>/dev/null`" ]; then
 clear
 echo "You have the latest version."
 sleep 1
@@ -37,6 +35,7 @@ done
 clear
 echo "Downloading..."
 sleep 1
-
+#to be changed         ↓
 curl -k -L -o -s /tmp/$name $cloud
+#to be changed         ↑
 exit
