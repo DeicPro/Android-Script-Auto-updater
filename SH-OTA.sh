@@ -178,13 +178,13 @@ mkdir -p /tmp/
 chmod 755 /tmp/
 touch $info
 
+
 if [ ! -f $xbin/curl ]; then
 	clear
 	echo "Curl binaries not found."
 	sleep 1
 	clear
 	echo "Downloading curl binaries..."
-	sleep 1
 	am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity https://github.com/DeicPro/Download/releases/download/curl/curl.zip >/dev/null 2>&1
 	curl="1"
 fi
@@ -195,7 +195,7 @@ if [ "$curl" == 1 ]; then
 			kill -9 $(pgrep com.android.browser)
 			clear
 			echo "Installing..."
-			sleep 1
+			sleep 3
 			unzip -oq $ext -d /tmp/
 			break
 		fi
@@ -209,8 +209,8 @@ if [ "$curl" == 1 ]; then
 			cp -f /tmp/openssl $xbin/
 			cp -f /tmp/openssl.cnf $ssl/
 			cp -f /tmp/ca-bundle.crt $certs/
-			chmod 755 $xbin/curl
-			chmod 755 $xbin/openssl
+			sleep 2
+			chmod -R 755 $xbin/
 			chmod -R 755 $ssl/
 			rm -f $ext
 			break
@@ -248,10 +248,10 @@ while true; do
 		if [ -f $tmp ]; then
 			clear
 			echo "Installing..."
-			sleep 1
 			cp -f $tmp $script
-			rm -f $tmp
+			sleep 2
 			chmod 755 $script
+			rm -f $tmp
 			clear
 			echo "Installed."
 			sleep 1
