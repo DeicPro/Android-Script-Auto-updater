@@ -10,19 +10,19 @@ Coming soon...
 
 3. Edit your script
 -----------------------------------------------
-3.a Add the code of SH-OTA.sh in your script
+* Add the code of SH-OTA.sh in your script
 
-3.b Write the link of your future modified version.sh file, example:
+* Write the link of your future modified version.sh file, example:
 
 	cloud="https://www.your_site.com/version.sh"
 
 4. Edit version.sh file
 -----------------------------------------------
-4.a Write the latest version of your script, example:
+* Write the latest version of your script, example:
 
 	version="1.0_stable"
 
-4.b Write the link of the latest version of your script, example:
+* Write the link of the latest version of your script, example:
 
 	cloud="https://your_site.com/your_script.sh"
 
