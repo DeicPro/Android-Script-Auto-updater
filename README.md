@@ -1,5 +1,5 @@
-How to | lol
-------
+How to
+-----------------------------------------------
 Download SH-OTA.sh
 
 Coming soon...
