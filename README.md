@@ -10,15 +10,15 @@ Coming soon...
 
 #3• Edit your script
 
-	3.1• Add the code of SH-OTA.sh in your script
+3.1• Add the code of SH-OTA.sh in your script
 
-	3.2• Put the link of your future modified version.sh file, example:
+3.2• Put the link of your future modified version.sh file, example:
 
 	cloud="https://www.your_site.com/version.sh"
 
 #4• Edit version.sh file
 
-4.1• Put the latest version of your script, example:
+4.1• Write the latest version of your script, example:
 
 	version="1.0_stable"
 
@@ -26,8 +26,6 @@ Coming soon...
 
 	cloud="https://your_site.com/your_script.sh"
 
-#5• Upload your script & version.sh files
+#5• Upload your script & version.sh files to the same site you write in the files (genious)
 
-5.1• Upload to the same site like you write in the files
-
-#6• ENJOY!
+#6• ENJOY! :)
