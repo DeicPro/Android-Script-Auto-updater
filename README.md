@@ -12,7 +12,7 @@ Coming soon...
 
 3.1• Add the code of SH-OTA.sh in your script
 
-3.2• Put the link of your future modified version.sh file, example:
+3.2• Write the link of your future modified version.sh file, example:
 
 	cloud="https://www.your_site.com/version.sh"
 
@@ -22,7 +22,7 @@ Coming soon...
 
 	version="1.0_stable"
 
-4.2• Put the link of the latest version of your script, example:
+4.2• Write the link of the latest version of your script, example:
 
 	cloud="https://your_site.com/your_script.sh"
 
