@@ -1,9 +1,7 @@
 SH-OTA(){ #v1.2_alpha By Deic & hoholee12
 
 #Edit values
-name="your_script.sh"
 version="version"
-location="/system/xbin"
 cloud="https://your_site.com/ota.sh"
 
 #Not edit
@@ -168,8 +166,9 @@ ssl="/data/local/ssl"
 certs="$ssl/certs/"
 xbin="/system/xbin"
 ota="/tmp/ota.sh"
+#to be changed
 tmp="/tmp/$name"
-script="$location/$name"
+#to be changed
 
 $mount_rw rootfs
 $mount_rw /system
@@ -249,20 +248,18 @@ while true; do
 		if [ -f $tmp ]; then
 			clear
 			echo "Installing..."
-			cp -f $tmp $script
+			cp -f $tmp $0
 			sleep 2
-			chmod 755 $script
-			rm -f $tmp
+			chmod 755 $0
+			rm -rf /tmp/
 			clear
 			echo "Installed."
 			sleep 1
-			rm -rf /tmp/
-			$script
+			$SHELL -c $0
 			clear
 			exit
 		fi
 	fi
 done
 }
-
 SH-OTA
