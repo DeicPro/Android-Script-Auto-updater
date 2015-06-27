@@ -1,5 +1,5 @@
 #How to
-
+-----------------------------------------------
 1. Download SH-OTA.sh
 -----------------------------------------------
 Coming soon...
@@ -28,5 +28,5 @@ Coming soon...
 
 5. Upload your script & version.sh files to the same site you write in the files (genious)
 -----------------------------------------------
-
+#
 ENJOY! :)
