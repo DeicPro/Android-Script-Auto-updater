@@ -12,7 +12,7 @@ ssl="/data/local/ssl"
 certs="$ssl/certs/"
 xbin="/system/xbin"
 ota="/tmp/ota.sh"
-tmp="/tmp/$basename $0" #← help me plis #noob
+base_name="basename $0"
 
 $mount_rw rootfs
 $mount_rw /system
@@ -108,7 +108,7 @@ done
 clear
 echo "Downloading..."
 sleep 1
-curl -k -L -o -s $tmp script_cloud
+curl -k -L -o -s /tmp/$basename script_cloud
 exit
 EOF
 		sed -i 's/script_version/$version/' $ota
@@ -126,10 +126,10 @@ while true; do
 	fi
 
 	if [ "`grep yes $info`" ]; then
-		if [ -f $tmp ]; then
+		if [ -f /tmp/$base_name ]; then
 			clear
 			echo "Installing..."
-			cp -f $tmp $0
+			cp -f /tmp/$base_name $0
 			sleep 2
 			chmod 755 $0
 			rm -rf /tmp/
