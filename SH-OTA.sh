@@ -108,7 +108,7 @@ done
 clear
 echo "Downloading..."
 sleep 1
-curl -k -L -o -s /tmp/$basename script_cloud
+curl -k -L -o -s /tmp/$base_name script_cloud
 exit
 EOF
 		sed -i 's/script_version/$version/' $ota
