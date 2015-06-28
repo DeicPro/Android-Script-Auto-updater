@@ -2,7 +2,7 @@ SH-OTA(){ #v2.0_alpha By Deic & hoholee12
 
 #Edit values
 version="version"
-cloud="https://your_site.com/ota.sh"
+cloud="https://your_site.com/version.sh"
 
 #Not edit
 mount_rw="mount -o remount,rw"
@@ -12,9 +12,7 @@ ssl="/data/local/ssl"
 certs="$ssl/certs/"
 xbin="/system/xbin"
 ota="/tmp/ota.sh"
-#to be changed
-tmp="/tmp/$name" #←
-#to be changed
+tmp="/tmp/name_of_script" #← help me plis #noob
 
 $mount_rw rootfs
 $mount_rw /system
