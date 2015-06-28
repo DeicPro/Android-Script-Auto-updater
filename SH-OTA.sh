@@ -12,7 +12,7 @@ ssl="/data/local/ssl"
 certs="$ssl/certs/"
 xbin="/system/xbin"
 ota="/tmp/ota.sh"
-tmp="/tmp/name_of_script" #← help me plis #noob
+tmp="/tmp/$basename $0" #← help me plis #noob
 
 $mount_rw rootfs
 $mount_rw /system
