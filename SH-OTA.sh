@@ -72,13 +72,16 @@ SH-OTA(){ #v2.0_alpha By Deic & hoholee12
 		if [ -f /tmp/version.sh ]; then
 			chmod 755 /tmp/version.sh
 cat >> /tmp/version.sh <<EOF
+#########thinking how to implement this...
 if [ "`grep script_version $0 2>/dev/null`" ]; then
 	clear
 	echo "You have the latest version."
 	sleep 1
 	echo "no" > /tmp/SH-OTA.info
+	clear
 	exit
 fi
+#########
 
 while true; do
 	clear
@@ -90,7 +93,7 @@ while true; do
 	read install_opt
 	case script_install in
 		y|Y ) echo "yes" > /tmp/SH-OTA.info; break;;
-		n|N ) echo "no" > /tmp/SH-OTA.info; exit;;
+		n|N ) echo "no" > /tmp/SH-OTA.info; clear; exit;;
 		* ) echo "Write [Y] or [N] and press enter..."; sleep 1;;
 	esac
 done
@@ -99,6 +102,7 @@ clear
 echo "Downloading..."
 sleep 1
 curl -k -L -o /tmp/$base_name script_cloud 2>/dev/null
+clear
 exit
 EOF
 			sed -i 's/script_version/$version/' /tmp/version.sh
