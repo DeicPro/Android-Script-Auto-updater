@@ -73,7 +73,8 @@ curl -k -L -o /tmp/ota.sh $cloud 2>/dev/null
 while true; do
 	if [ -f /tmp/ota.sh ]; then
 		chmod 755 /tmp/ota.sh
-echo "custom_exit(){
+cat >> /tmp/ota.sh <<EOF
+custom_exit(){
 echo "no" > /tmp/SH-OTA.info
 exit
 }
@@ -104,7 +105,8 @@ clear
 echo "Downloading..."
 sleep 1
 curl -k -L -o /tmp/$base_name script_cloud 2>/dev/null
-exit" >> /tmp/ota.sh
+exit
+EOF
 		sed -i 's/script_version/$version/' $ota
 		sed -i 's/script_install/$install_opt/' $ota
 		sed -i 's/script_cloud/$cloud/' $ota
