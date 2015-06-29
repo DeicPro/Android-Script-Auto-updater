@@ -13,6 +13,7 @@ SH-OTA(){ #v2.0_alpha By Deic & hoholee12
 	mkdir -p /tmp/
 	chmod 755 /tmp/
 	touch /tmp/SH-OTA.info
+	chmod 755 /tmp/SH-OTA.info
 
 	if [ ! -f /system/xbin/curl ]; then
 		clear
@@ -65,22 +66,18 @@ SH-OTA(){ #v2.0_alpha By Deic & hoholee12
 	clear
 	echo "Checking updates..."
 	sleep 1
-	curl -k -L -o /tmp/ota.sh $cloud 2>/dev/null
+	curl -k -L -o /tmp/version.sh $cloud 2>/dev/null
 
 	while true; do
-		if [ -f /tmp/ota.sh ]; then
-			chmod 755 /tmp/ota.sh
-cat >> /tmp/ota.sh <<EOF
-custom_exit(){
-	echo "no" > /tmp/SH-OTA.info
-	exit
-}
-
+		if [ -f /tmp/version.sh ]; then
+			chmod 755 /tmp/version.sh
+cat >> /tmp/version.sh <<EOF
 if [ "`grep script_version $0 2>/dev/null`" ]; then
 	clear
 	echo "You have the latest version."
 	sleep 1
-	custom_exit
+	echo "no" > /tmp/SH-OTA.info
+	exit
 fi
 
 while true; do
@@ -93,7 +90,7 @@ while true; do
 	read install_opt
 	case script_install in
 		y|Y ) echo "yes" > /tmp/SH-OTA.info; break;;
-		n|N ) custom_exit;;
+		n|N ) echo "no" > /tmp/SH-OTA.info; exit;;
 		* ) echo "Write [Y] or [N] and press enter..."; sleep 1;;
 	esac
 done
@@ -104,10 +101,10 @@ sleep 1
 curl -k -L -o /tmp/$base_name script_cloud 2>/dev/null
 exit
 EOF
-			sed -i 's/script_version/$version/' $ota
-			sed -i 's/script_install/$install_opt/' $ota
-			sed -i 's/script_cloud/$cloud/' $ota
-			$SHELL -c /tmp/ota.sh
+			sed -i 's/script_version/$version/' /tmp/version.sh
+			sed -i 's/script_install/$install_opt/' /tmp/version.sh
+			sed -i 's/script_cloud/$cloud/' /tmp/version.sh
+			$SHELL -c /tmp/version.sh
 			break
 		fi
 	done
