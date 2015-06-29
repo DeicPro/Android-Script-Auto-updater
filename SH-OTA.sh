@@ -6,13 +6,13 @@ cloud="https://your_site.com/version.sh"
 
 #Not edit
 mount_rw="mount -o remount,rw"
-info=/tmp/SH-OTA.info
+info="/tmp/SH-OTA.info"
 ext="$EXTERNAL_STORAGE/download/curl.zip"
 ssl="/data/local/ssl"
 certs="$ssl/certs/"
 xbin="/system/xbin"
 ota="/tmp/ota.sh"
-base_name="basename $0"
+base_name=`basename $0`
 
 $mount_rw rootfs
 $mount_rw /system
@@ -72,12 +72,12 @@ fi
 clear
 echo "Checking updates..."
 sleep 1
-curl -k -L -o -s $ota $cloud
+curl -k -L -o $ota $cloud 2>/dev/null
 
 while true; do
 	if [ -f $ota ]; then
 		chmod 755 $ota
-cat >> $ota <<EOF
+cat >> $ota <<-EOF
 custom_exit(){
 echo "no" > /tmp/SH-OTA.info
 exit
@@ -108,7 +108,7 @@ done
 clear
 echo "Downloading..."
 sleep 1
-curl -k -L -o -s /tmp/$base_name script_cloud
+curl -k -L -o /tmp/$base_name script_cloud 2>/dev/null
 exit
 EOF
 		sed -i 's/script_version/$version/' $ota
