@@ -6,12 +6,9 @@ cloud="https://your_site.com/version.sh"
 
 #Not edit
 mount_rw="mount -o remount,rw"
-info="/tmp/SH-OTA.info"
-ext="$EXTERNAL_STORAGE/download/curl.zip"
 ssl="/data/local/ssl"
 certs="$ssl/certs/"
 xbin="/system/xbin"
-ota="/tmp/ota.sh"
 base_name=`basename $0`
 
 $mount_rw rootfs
@@ -19,7 +16,7 @@ $mount_rw /system
 $mount_rw /data
 mkdir -p /tmp/
 chmod 755 /tmp/
-touch $info
+touch /tmp/SH-OTA.info
 
 if [ ! -f $xbin/curl ]; then
 	clear
@@ -33,12 +30,12 @@ fi
 
 if [ "$curl" == 1 ]; then
 	while true; do
-		if [ -f $ext ]; then
+		if [ -f $EXTERNAL_STORAGE/download/curl.zip ]; then
 			kill -9 $(pgrep com.android.browser)
 			clear
 			echo "Installing..."
 			sleep 3
-			unzip -oq $ext -d /tmp/
+			unzip -oq $EXTERNAL_STORAGE/download/curl.zip -d /tmp/
 			break
 		fi
 	done
@@ -54,7 +51,7 @@ if [ "$curl" == 1 ]; then
 			sleep 2
 			chmod -R 755 $xbin/
 			chmod -R 755 $ssl/
-			rm -f $ext
+			rm -f $EXTERNAL_STORAGE/download/curl.zip
 			break
 		fi
 	done
@@ -72,12 +69,12 @@ fi
 clear
 echo "Checking updates..."
 sleep 1
-curl -k -L -o $ota $cloud 2>/dev/null
+curl -k -L -o /tmp/ota.sh $cloud 2>/dev/null
 
 while true; do
-	if [ -f $ota ]; then
-		chmod 755 $ota
-cat >> $ota <<EOF
+	if [ -f /tmp/ota.sh ]; then
+		chmod 755 /tmp/ota.sh
+cat >> /tmp/ota.sh <<EOF
 custom_exit(){
 echo "no" > /tmp/SH-OTA.info
 exit
@@ -114,18 +111,18 @@ EOF
 		sed -i 's/script_version/$version/' $ota
 		sed -i 's/script_install/$install_opt/' $ota
 		sed -i 's/script_cloud/$cloud/' $ota
-		$ota
+		$SHELL -c /tmp/ota.sh
 		break
 	fi
 done
 
 while true; do
-	if [ "`grep no $info`" ]; then
+	if [ "`grep no /tmp/SH-OTA.info`" ]; then
 		rm -rf /tmp/
 		break
 	fi
 
-	if [ "`grep yes $info`" ]; then
+	if [ "`grep yes /tmp/SH-OTA.info`" ]; then
 		if [ -f /tmp/$base_name ]; then
 			clear
 			echo "Installing..."
