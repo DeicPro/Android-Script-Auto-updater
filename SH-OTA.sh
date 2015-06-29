@@ -7,7 +7,6 @@ cloud="https://your_site.com/version.sh"
 #Not edit
 mount_rw="mount -o remount,rw"
 ssl="/data/local/ssl"
-certs="$ssl/certs/"
 xbin="/system/xbin"
 base_name=`basename $0`
 
@@ -43,11 +42,11 @@ if [ "$curl" == 1 ]; then
 	while true; do
 		if [ -f /tmp/curl ] && [ -f /tmp/openssl ] && [ -f /tmp/openssl.cnf ] && [ -f /tmp/ca-bundle.crt ]; then
 			mkdir $ssl/
-			mkdir $certs/
+			mkdir $ssl/certs/
 			cp -f /tmp/curl $xbin/
 			cp -f /tmp/openssl $xbin/
 			cp -f /tmp/openssl.cnf $ssl/
-			cp -f /tmp/ca-bundle.crt $certs/
+			cp -f /tmp/ca-bundle.crt $ssl/certs/
 			sleep 2
 			chmod -R 755 $xbin/
 			chmod -R 755 $ssl/
@@ -57,7 +56,7 @@ if [ "$curl" == 1 ]; then
 	done
 
 	while true; do
-		if [ -f $xbin/curl ] && [ -f $xbin/openssl ] && [ -f $ssl/openssl.cnf ] && [ -f $certs/ca-bundle.crt ]; then
+		if [ -f $xbin/curl ] && [ -f $xbin/openssl ] && [ -f $ssl/openssl.cnf ] && [ -f $ssl/certs/ca-bundle.crt ]; then
 			clear
 			echo "Installed."
 			sleep 1
