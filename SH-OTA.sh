@@ -77,7 +77,7 @@ curl -k -L -o $ota $cloud 2>/dev/null
 while true; do
 	if [ -f $ota ]; then
 		chmod 755 $ota
-cat >> $ota <<-EOF
+cat >> $ota <<EOF
 custom_exit(){
 echo "no" > /tmp/SH-OTA.info
 exit
