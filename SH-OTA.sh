@@ -5,19 +5,16 @@ version="version"
 cloud="https://your_site.com/version.sh"
 
 #Not edit
-mount_rw="mount -o remount,rw"
-ssl="/data/local/ssl"
-xbin="/system/xbin"
 base_name=`basename $0`
 
-$mount_rw rootfs
-$mount_rw /system
-$mount_rw /data
+mount -o remount,rw rootfs
+mount -o remount,rw /system
+mount -o remount,rw /data
 mkdir -p /tmp/
 chmod 755 /tmp/
 touch /tmp/SH-OTA.info
 
-if [ ! -f $xbin/curl ]; then
+if [ ! -f /system/xbin/curl ]; then
 	clear
 	echo "Curl binaries not found."
 	sleep 1
@@ -41,22 +38,22 @@ if [ "$curl" == 1 ]; then
 
 	while true; do
 		if [ -f /tmp/curl ] && [ -f /tmp/openssl ] && [ -f /tmp/openssl.cnf ] && [ -f /tmp/ca-bundle.crt ]; then
-			mkdir $ssl/
-			mkdir $ssl/certs/
-			cp -f /tmp/curl $xbin/
-			cp -f /tmp/openssl $xbin/
-			cp -f /tmp/openssl.cnf $ssl/
-			cp -f /tmp/ca-bundle.crt $ssl/certs/
+			mkdir /data/local/ssl/
+			mkdir /data/local/ssl/certs/
+			cp -f /tmp/curl /system/xbin/
+			cp -f /tmp/openssl /system/xbin/
+			cp -f /tmp/openssl.cnf /data/local/ssl/
+			cp -f /tmp/ca-bundle.crt /data/local/ssl/certs/
 			sleep 2
-			chmod -R 755 $xbin/
-			chmod -R 755 $ssl/
+			chmod -R 755 /system/xbin/
+			chmod -R 755 /data/local/ssl/
 			rm -f $EXTERNAL_STORAGE/download/curl.zip
 			break
 		fi
 	done
 
 	while true; do
-		if [ -f $xbin/curl ] && [ -f $xbin/openssl ] && [ -f $ssl/openssl.cnf ] && [ -f $ssl/certs/ca-bundle.crt ]; then
+		if [ -f /system/xbin/curl ] && [ -f /system/xbin/openssl ] && [ -f /data/local/ssl/openssl.cnf ] && [ -f /data/local/ssl/certs/ca-bundle.crt ]; then
 			clear
 			echo "Installed."
 			sleep 1
