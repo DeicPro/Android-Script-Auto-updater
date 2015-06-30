@@ -94,10 +94,10 @@ SH-OTA(){ #v2.0_alpha By Deic, DiamondBond & hoholee12
 				clear
 				echo "Downloading..."
 				sleep 1
-for script_cloud in $(grep cloud /tmp/version.sh | awk '{print $2}' ); do
-				curl -k -L -o /tmp/$base_name $script_cloud 2>/dev/null
-done
-			break
+				for script_cloud in $(grep cloud /tmp/version.sh | awk '{print $2}' ); do
+					curl -k -L -o /tmp/$base_name $script_cloud 2>/dev/null
+				done
+				break
 			fi
 		fi
 	done
