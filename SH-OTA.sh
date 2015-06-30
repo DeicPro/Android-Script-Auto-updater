@@ -84,7 +84,7 @@ SH-OTA(){ #v2.0_alpha By Deic, DiamondBond & hoholee12
 					echo
 					echo -n "> "
 					read install_opt
-					case script_install in
+					case $install_opt in
 						y|Y ) echo "yes" > /tmp/SH-OTA.info; break;;
 						n|N ) echo "no" > /tmp/SH-OTA.info; break;;
 						* ) echo "Write [Y] or [N] and press enter..."; sleep 1;;
