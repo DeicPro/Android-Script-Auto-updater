@@ -70,52 +70,41 @@ SH-OTA(){ #v2.0_alpha By Deic, DiamondBond & hoholee12
 
 	while true; do
 		if [ -f /tmp/version.sh ]; then
-			chmod 755 /tmp/version.sh
-cat >> /tmp/version.sh <<EOF
-#########thinking how to implement this...
-if [ "`grep script_version $0 2>/dev/null`" ]; then
-	clear
-	echo "You have the latest version."
-	sleep 1
-	echo "no" > /tmp/SH-OTA.info
-	clear
-	exit
-fi
-#########
+			if [ "`grep $version /tmp/version.sh 2>/dev/null`" ]; then
+				clear
+				echo "You have the latest version."
+				sleep 1
+				echo "no" > /tmp/SH-OTA.info
+			else
+				while true; do
+					clear
+					echo "A new version of the script was found..."
+					echo
+					echo "Want install it? (Y/N)"
+					echo
+					echo -n "> "
+					read install_opt
+					case script_install in
+						y|Y ) echo "yes" > /tmp/SH-OTA.info; break;;
+						n|N ) echo "no" > /tmp/SH-OTA.info; break;;
+						* ) echo "Write [Y] or [N] and press enter..."; sleep 1;;
+					esac
+				done
 
-while true; do
-	clear
-	echo "A new version of the script was found..."
-	echo
-	echo "Want install it? (Y/N)"
-	echo
-	echo -n "> "
-	read install_opt
-	case script_install in
-		y|Y ) echo "yes" > /tmp/SH-OTA.info; break;;
-		n|N ) echo "no" > /tmp/SH-OTA.info; clear; exit;;
-		* ) echo "Write [Y] or [N] and press enter..."; sleep 1;;
-	esac
+				clear
+				echo "Downloading..."
+				sleep 1
+for script_cloud in $(grep cloud /tmp/version.sh | awk '{print $3}' ); do
+				curl -k -L -o /tmp/$base_name $script_cloud 2>/dev/null
 done
-
-clear
-echo "Downloading..."
-sleep 1
-curl -k -L -o /tmp/$base_name script_cloud 2>/dev/null
-clear
-exit
-EOF
-			sed -i 's/script_version/$version/' /tmp/version.sh
-			sed -i 's/script_install/$install_opt/' /tmp/version.sh
-			sed -i 's/script_cloud/$cloud/' /tmp/version.sh
-			$SHELL -c /tmp/version.sh
 			break
+			fi
 		fi
 	done
 
 	while true; do
 		if [ "`grep no /tmp/SH-OTA.info`" ]; then
-			rm -rf /tmp/
+			clear
 			break
 		fi
 
@@ -126,7 +115,6 @@ EOF
 				cp -f /tmp/$base_name $0
 				sleep 2
 				chmod 755 $0
-				rm -rf /tmp/
 				clear
 				echo "Installed."
 				sleep 1
