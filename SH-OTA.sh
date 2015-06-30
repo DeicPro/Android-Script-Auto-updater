@@ -68,6 +68,23 @@ SH-OTA(){ #v2.0_alpha By Deic, DiamondBond & hoholee12
 	sleep 1
 	curl -k -L -o /tmp/version.sh $cloud 2>/dev/null
 
+	install(){
+while true; do
+		clear
+		echo "A new version of the script was found..."
+		echo
+		echo "Want install it? (Y/N)"
+		echo
+		echo -n "> "
+		read install_opt
+		case $install_opt in
+			y|Y ) echo "yes" > /tmp/SH-OTA.info; break;;
+			n|N ) echo "no" > /tmp/SH-OTA.info; break;;
+			* ) echo "Write [Y] or [N] and press enter..."; sleep 1;;
+		esac
+done
+	}
+
 	while true; do
 		if [ -f /tmp/version.sh ]; then
 			if [ "`grep $version /tmp/version.sh 2>/dev/null`" ]; then
@@ -75,22 +92,9 @@ SH-OTA(){ #v2.0_alpha By Deic, DiamondBond & hoholee12
 				echo "You have the latest version."
 				sleep 1
 				echo "no" > /tmp/SH-OTA.info
+				break
 			else
-				while true; do
-					clear
-					echo "A new version of the script was found..."
-					echo
-					echo "Want install it? (Y/N)"
-					echo
-					echo -n "> "
-					read install_opt
-					case $install_opt in
-						y|Y ) echo "yes" > /tmp/SH-OTA.info; break;;
-						n|N ) echo "no" > /tmp/SH-OTA.info; break;;
-						* ) echo "Write [Y] or [N] and press enter..."; sleep 1;;
-					esac
-				done
-
+				install
 				clear
 				echo "Downloading..."
 				sleep 1
