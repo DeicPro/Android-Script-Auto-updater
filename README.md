@@ -18,7 +18,7 @@ Coming soon...
 
 3.2 Write the link of your modified version.sh file, example:
 
-	cloud:	https://www.your_site.com/version.sh
+	cloud:		https://www.your_site.com/version.sh
 
 4. Edit version.sh file
 -----------------------------------------------
@@ -28,7 +28,7 @@ Coming soon...
 
 4.2 Write the link of the latest version of your script, example:
 
-	cloud:	https://your_site.com/your_script.sh
+	cloud:		https://your_site.com/your_script.sh
 
 5. Upload your script & version.sh files to the same site you write in the files (genious)
 -----------------------------------------------
