@@ -1,4 +1,4 @@
-SH-OTA(){ #v2.0_beta By Deic, DiamondBond & hoholee12
+SH-OTA(){ #v2.0 By Deic, DiamondBond & hoholee12
 
 	#Edit values
 	version="version"
@@ -16,11 +16,11 @@ SH-OTA(){ #v2.0_beta By Deic, DiamondBond & hoholee12
 	if [ ! -f /system/xbin/curl ]; then
 		clear
 		echo "Curl binaries not found."
-		sleep 1
+		sleep 1.5
 		clear
 		echo "Downloading curl binaries..."
 		am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity https://github.com/DeicPro/Download/releases/download/curl/curl.zip >/dev/null 2>&1
-		sleep 5
+		sleep 10
 		curl="1"
 	fi
 
@@ -55,7 +55,7 @@ SH-OTA(){ #v2.0_beta By Deic, DiamondBond & hoholee12
 			if [ -f /system/xbin/curl ] && [ -f /system/xbin/openssl ] && [ -f /data/local/ssl/openssl.cnf ] && [ -f /data/local/ssl/certs/ca-bundle.crt ]; then
 				clear
 				echo "Installed."
-				sleep 1
+				sleep 1.5
 				break
 			fi
 		done
@@ -70,7 +70,8 @@ SH-OTA(){ #v2.0_beta By Deic, DiamondBond & hoholee12
 			if [ "`grep $version /tmp/version.sh 2>/dev/null`" ]; then
 				clear
 				echo "You have the latest version."
-				sleep 1
+				sleep 1.5
+install="0"
 				break
 			else
 				clear
@@ -91,7 +92,7 @@ SH-OTA(){ #v2.0_beta By Deic, DiamondBond & hoholee12
 					;;
 					* )
 						echo "Write [Y] or [N] and press enter..."
-						sleep 1
+						sleep 1.5
 					;;
 				esac
 			fi
@@ -101,7 +102,6 @@ SH-OTA(){ #v2.0_beta By Deic, DiamondBond & hoholee12
 	if [ "$install"  == 1 ]; then
 		clear
 		echo "Downloading..."
-		sleep 1
 
 		for script_cloud in $(grep cloud /tmp/version.sh | awk '{print $2}' ); do
 			curl -k -L -o /tmp/$base_name $script_cloud 2>/dev/null
