@@ -71,7 +71,7 @@ SH-OTA(){ #v2.0 By Deic, DiamondBond & hoholee12
 				clear
 				echo "You have the latest version."
 				sleep 1.5
-install="0"
+				install="0"
 				break
 			else
 				clear
