@@ -3,11 +3,11 @@
 
 1. Download SH-OTA.sh
 -----------------------------------------------
-Coming soon...
+https://github.com/DeicPro/SH-OTA/releases/download/v2.0/SH-OTA.sh
 
 2. Download version.sh
 -----------------------------------------------
-Coming soon...
+https://github.com/DeicPro/SH-OTA/releases/download/v2.0/version.sh
 
 3. Edit your script
 -----------------------------------------------
@@ -29,7 +29,7 @@ Coming soon...
 
 4.2 Write the link of the latest version of your script, example:
 
-	cloud:		https://your_site.com/your_script.sh
+	cloud:	https://your_site.com/your_script.sh
 
 5. Upload your script & version.sh files
 -----------------------------------------------
