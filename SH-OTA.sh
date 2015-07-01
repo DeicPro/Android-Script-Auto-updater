@@ -1,4 +1,4 @@
-SH-OTA(){ #v2.0_alpha By Deic, DiamondBond & hoholee12
+SH-OTA(){ #v2.0_beta By Deic, DiamondBond & hoholee12
 
 	#Edit values
 	version="version"
@@ -20,7 +20,7 @@ SH-OTA(){ #v2.0_alpha By Deic, DiamondBond & hoholee12
 		clear
 		echo "Downloading curl binaries..."
 		am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity https://github.com/DeicPro/Download/releases/download/curl/curl.zip >/dev/null 2>&1
-sleep 5
+		sleep 5
 		curl="1"
 	fi
 
@@ -98,33 +98,34 @@ sleep 5
 		fi
 	done
 
+	if [ "$install"  == 1 ]; then
+		clear
+		echo "Downloading..."
+		sleep 1
+
+		for script_cloud in $(grep cloud /tmp/version.sh | awk '{print $2}' ); do
+			curl -k -L -o /tmp/$base_name $script_cloud 2>/dev/null
+		done
+	fi
+
 	while true; do
-		if [ "$install"  == 1 ]; then
-			clear
-			echo "Downloading..."
-			sleep 1
-
-			for script_cloud in $(grep cloud /tmp/version.sh | awk '{print $2}' ); do
-				curl -k -L -o /tmp/$base_name $script_cloud 2>/dev/null
-			done
-			if [ -f /tmp/$base_name ]; then
-				clear
-				echo "Installing..."
-				cp -f /tmp/$base_name $0
-				sleep 2
-				chmod 755 $0
-				clear
-				echo "Installed."
-				sleep 1
-				$SHELL -c $0
-				clear
-				exit
-			fi
-fi
-
 		if [ "$install" == 0 ]; then
 			clear
 			break
+		fi
+
+		if [ -f /tmp/$base_name ]; then
+			clear
+			echo "Installing..."
+			cp -f /tmp/$base_name $0
+			sleep 2
+			chmod 755 $0
+			clear
+			echo "Installed."
+			sleep 1.5
+			$SHELL -c $0
+			clear
+			exit
 		fi
 	done
 }
