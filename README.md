@@ -1,5 +1,6 @@
 #How to
 -----------------------------------------------
+
 1. Download SH-OTA.sh
 -----------------------------------------------
 Coming soon...
@@ -33,5 +34,5 @@ Coming soon...
 5. Upload your script & version.sh files
 -----------------------------------------------
 5.1 Upload to the same site you write in the files (genious lol)
------------------------------------------------
+
 ENJOY! :)
