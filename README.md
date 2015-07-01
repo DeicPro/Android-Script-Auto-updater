@@ -17,7 +17,7 @@ https://github.com/DeicPro/SH-OTA/releases/download/v2.0/version.sh
 
 	version="1.0_stable"
 
-3.2 Write the link of your modified version.sh file, example:
+3.3 Write the link of your modified version.sh file, example:
 
 	cloud="https://www.your_site.com/version.sh"
 
