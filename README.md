@@ -30,6 +30,8 @@ Coming soon...
 
 	cloud:		https://your_site.com/your_script.sh
 
-5. Upload your script & version.sh files to the same site you write in the files (genious lol)
+5. Upload your script & version.sh files
+-----------------------------------------------
+5.1 Upload to the same site you write in the files (genious lol)
 -----------------------------------------------
 ENJOY! :)
