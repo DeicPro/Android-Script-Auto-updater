@@ -12,8 +12,6 @@ SH-OTA(){ #v2.0_alpha By Deic, DiamondBond & hoholee12
 	mount -o remount,rw /data
 	mkdir -p /tmp/
 	chmod 755 /tmp/
-	touch /tmp/SH-OTA.info
-	chmod 755 /tmp/SH-OTA.info
 
 	if [ ! -f /system/xbin/curl ]; then
 		clear
@@ -22,6 +20,7 @@ SH-OTA(){ #v2.0_alpha By Deic, DiamondBond & hoholee12
 		clear
 		echo "Downloading curl binaries..."
 		am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity https://github.com/DeicPro/Download/releases/download/curl/curl.zip >/dev/null 2>&1
+sleep 5
 		curl="1"
 	fi
 
@@ -31,7 +30,6 @@ SH-OTA(){ #v2.0_alpha By Deic, DiamondBond & hoholee12
 				kill -9 $(pgrep com.android.browser)
 				clear
 				echo "Installing..."
-				sleep 3
 				unzip -oq $EXTERNAL_STORAGE/download/curl.zip -d /tmp/
 				break
 			fi
@@ -65,25 +63,7 @@ SH-OTA(){ #v2.0_alpha By Deic, DiamondBond & hoholee12
 
 	clear
 	echo "Checking updates..."
-	sleep 1
 	curl -k -L -o /tmp/version.sh $cloud 2>/dev/null
-
-	install(){
-while true; do
-		clear
-		echo "A new version of the script was found..."
-		echo
-		echo "Want install it? (Y/N)"
-		echo
-		echo -n "> "
-		read install_opt
-		case $install_opt in
-			y|Y ) echo "yes" > /tmp/SH-OTA.info; break;;
-			n|N ) echo "no" > /tmp/SH-OTA.info; break;;
-			* ) echo "Write [Y] or [N] and press enter..."; sleep 1;;
-		esac
-done
-	}
 
 	while true; do
 		if [ -f /tmp/version.sh ]; then
@@ -91,28 +71,42 @@ done
 				clear
 				echo "You have the latest version."
 				sleep 1
-				echo "no" > /tmp/SH-OTA.info
 				break
 			else
-				install
 				clear
-				echo "Downloading..."
-				sleep 1
-				for script_cloud in $(grep cloud /tmp/version.sh | awk '{print $2}' ); do
-					curl -k -L -o /tmp/$base_name $script_cloud 2>/dev/null
-				done
-				break
+				echo "A new version of the script was found..."
+				echo
+				echo "Want install it? (Y/N)"
+				echo
+				echo -n "> "
+				read install_opt
+				case $install_opt in
+					y|Y )
+						install="1"
+						break
+					;;
+					n|N )
+						install="0"
+						break
+					;;
+					* )
+						echo "Write [Y] or [N] and press enter..."
+						sleep 1
+					;;
+				esac
 			fi
 		fi
 	done
 
 	while true; do
-		if [ "`grep no /tmp/SH-OTA.info`" ]; then
+		if [ "$install"  == 1 ]; then
 			clear
-			break
-		fi
+			echo "Downloading..."
+			sleep 1
 
-		if [ "`grep yes /tmp/SH-OTA.info`" ]; then
+			for script_cloud in $(grep cloud /tmp/version.sh | awk '{print $2}' ); do
+				curl -k -L -o /tmp/$base_name $script_cloud 2>/dev/null
+			done
 			if [ -f /tmp/$base_name ]; then
 				clear
 				echo "Installing..."
@@ -126,6 +120,11 @@ done
 				clear
 				exit
 			fi
+fi
+
+		if [ "$install" == 0 ]; then
+			clear
+			break
 		fi
 	done
 }
