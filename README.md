@@ -35,4 +35,4 @@ Coming soon...
 -----------------------------------------------
 5.1 Upload to the same site you write in the files (genious lol)
 
-$ENJOY! :)$
+*ENJOY! :)*
