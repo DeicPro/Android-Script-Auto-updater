@@ -1,10 +1,20 @@
-SH-OTA(){ #v2.0 By Deic, DiamondBond & hoholee12
+SH-OTA(){ # v2.1 By Deic, DiamondBond & hoholee12
 
-	#Edit values
+	# Configuration
 	version="version"
 	cloud="https://your_site.com/version.sh"
 
-	#Not edit
+	# Optional
+	notes="
+changelog or something
+"
+	# 0/1 = Disabled/Enabled
+	show_notes="0"
+	show_version="1"
+
+
+	# Don't touch from here
+	info=`if [ "$show_version" == 1 ]; then echo "$version; echo; elif [ "$show_notes" == 1 ]; then echo "$notes"; echo; fi`
 	base_name=`basename $0`
 
 	mount -o remount,rw rootfs
@@ -77,6 +87,7 @@ SH-OTA(){ #v2.0 By Deic, DiamondBond & hoholee12
 				clear
 				echo "A new version of the script was found..."
 				echo
+				$info
 				echo "Want install it? (Y/N)"
 				echo
 				echo -n "> "
