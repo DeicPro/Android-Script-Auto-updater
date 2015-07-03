@@ -14,7 +14,7 @@ changelog or something
 
 
 	# Don't touch from here
-	info=`if [ "$show_version" == 1 ]; then echo "$version; echo; elif [ "$show_notes" == 1 ]; then echo "$notes"; echo; fi`
+	info=`if [ "$show_version" == 1 ]; then echo "$version"; echo; elif [ "$show_notes" == 1 ]; then echo "$notes"; echo; fi`
 	base_name=`basename $0`
 
 	mount -o remount,rw rootfs
