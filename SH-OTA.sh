@@ -86,6 +86,8 @@ changelog or something
 			else
 				clear
 				echo "A new version of the script was found..."
+				sleep 1.5
+				clear
 				echo
 				$info
 				echo "Want install it? (Y/N)"
