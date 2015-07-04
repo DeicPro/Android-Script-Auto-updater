@@ -73,9 +73,13 @@ SH-OTA(){ # v2.1 By Deic, DiamondBond & hoholee12
 	echo "Checking updates..."
 	curl -k -L -o /tmp/update.txt $cloud 2>/dev/null
 
+	if [ "$show_notes" == 1 ]; then
+		curl -k -L -o /tmp/notes.txt $notes 2>/dev/null
+	fi
+
 	while true; do
 		if [ -f /tmp/update.txt ]; then
-			if [ "`grep $1 /tmp/update.txt.sh 2>/dev/null`" ]; then
+			if [ "`grep $version /tmp/update.txt 2>/dev/null`" ]; then
 				clear
 				echo "You have the latest version."
 				sleep 1.5
@@ -83,15 +87,16 @@ SH-OTA(){ # v2.1 By Deic, DiamondBond & hoholee12
 				break
 			else
 				if [ "$show_version" == 1 ]; then
-version_opt=": $version"
-else
-version_opt="..."
-fi
-if [ "$show_notes" == 1 ]; then
-curl -k -L -o /tmp/notes.txt $notes 2>/dev/null
-notes_opt=$(grep $1 /tmp/update.txt | awk '{print}' )
-echo
-fi
+					version_opt=": $version"
+				else
+					version_opt="..."
+				fi
+
+				if [ "$show_notes" == 1 ]; then
+					notes_opt=$(grep /tmp/update.txt | awk '{print}' )
+					echo
+				fi
+
 				clear
 				echo "A new version of the script was found$version_opt"
 				echo
