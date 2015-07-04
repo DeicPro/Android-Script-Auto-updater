@@ -13,7 +13,6 @@ SH-OTA(){ # v2.1 By Deic, DiamondBond & hoholee12
 
 
 	# Don't touch from here
-	busybox_status=`getprop persist.sh_ota.bb.status`
 	download=`am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity`
 	busybox_cloud="https://github.com/DeicPro/Download/releases/download/busybox/busybox"
 	curl_cloud="https://github.com/DeicPro/Download/releases/download/curl/curl.zip"
@@ -25,7 +24,7 @@ SH-OTA(){ # v2.1 By Deic, DiamondBond & hoholee12
 	mkdir -p /tmp/
 	chmod 755 /tmp/
 
-	if [ "$busybox_status" == "" ]; then
+	if [ getprop persist.sh_ota.bb.status == "" ]; then
 		clear
 		echo "Downloading Busybox binaries..."
 		sleep 1.5
@@ -77,11 +76,13 @@ SH-OTA(){ # v2.1 By Deic, DiamondBond & hoholee12
 			if [ -f /tmp/curl ] && [ -f /tmp/openssl ] && [ -f /tmp/openssl.cnf ] && [ -f /tmp/ca-bundle.crt ]; then
 				mkdir /data/local/ssl/
 				mkdir /data/local/ssl/certs/
-				cp -f /tmp/curl /system/xbin/
-				cp -f /tmp/openssl /system/xbin/
-				cp -f /tmp/openssl.cnf /data/local/ssl/
-				cp -f /tmp/ca-bundle.crt /data/local/ssl/certs/
+				cd /tmp/
+				cp -f curl /system/xbin/
+				cp -f openssl /system/xbin/
+				cp -f openssl.cnf /data/local/ssl/
+				cp -f ca-bundle.crt /data/local/ssl/certs/
 				sleep 2
+				cd /
 				chmod -R 755 /system/xbin/
 				chmod -R 755 /data/local/ssl/
 				rm -f $EXTERNAL_STORAGE/download/curl.zip
