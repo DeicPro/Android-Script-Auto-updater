@@ -1,2 +1,3 @@
-Write your version in this line.
-Write the url to your latest script in this line.
+Write your version in this line ←
+Write the url to your latest script in this line ←
+Delete all notes & write your version & url
