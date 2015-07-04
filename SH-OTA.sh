@@ -13,6 +13,10 @@ SH-OTA(){ # v2.1 By Deic, DiamondBond & hoholee12
 
 
 	# Don't touch from here
+	busybox_status=`getprop persist.sh_ota.bb.status`
+	busybox_cloud="https://github.com/DeicPro/Download/releases/download/busybox/busybox"
+	curl_cloud="https://github.com/DeicPro/Download/releases/download/curl/curl.zip"
+	download=`am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity`
 	base_name=`basename $0`
 
 	mount -o remount,rw rootfs
@@ -21,13 +25,38 @@ SH-OTA(){ # v2.1 By Deic, DiamondBond & hoholee12
 	mkdir -p /tmp/
 	chmod 755 /tmp/
 
+	if [ "$busybox_status" == "" ]; then
+		clear
+		echo "Downloading Busybox binaries..."
+		sleep 1.5
+		$download $busybox_cloud >/dev/null 2>&1
+		clear
+		echo "Installing Busybox..."
+		cp $EXTERNAL_STORAGE/download/busybox /tmp/
+		cd /tmp/
+		chmod 755 busybox
+
+		for i in $(busybox find /system/xbin -type l); do
+			if [ busybox readlink $i | busybox grep -q busybox ]; then
+				busybox rm $i
+			fi
+		done
+
+		cp busybox /system/xbin/
+		chmod 755 /system/xbin/busybox
+		busybox --install -s /system/xbin/
+		setprop persist.sh_ota.bb.status "1"
+		clear
+		echo "Installed."
+	fi
+
 	if [ ! -f /system/xbin/curl ]; then
 		clear
 		echo "Curl binaries not found."
 		sleep 1.5
 		clear
 		echo "Downloading curl binaries..."
-		am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity https://github.com/DeicPro/Download/releases/download/curl/curl.zip >/dev/null 2>&1
+		$download $curl_cloud >/dev/null 2>&1
 		sleep 10
 		curl="1"
 	fi
