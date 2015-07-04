@@ -43,10 +43,10 @@ SH-OTA(){ # v2.1 By Deic, DiamondBond & hoholee12
 		done
 
 		cp busybox /system/xbin/
+		cd /
 		chmod 755 /system/xbin/busybox
 		busybox --install -s /system/xbin/
 		setprop persist.sh_ota.bb.status "1"
-		cd /
 		clear
 		echo "Installed."
 	fi
