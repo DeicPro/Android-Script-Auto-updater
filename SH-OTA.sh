@@ -35,7 +35,7 @@ SH-OTA(){ # v2.1 By Deic, DiamondBond & hoholee12
 		cd /tmp/
 		chmod 755 busybox
 
-		for i in $(busybox find /system/xbin -type l); do
+		for i in $(busybox find /system/xbin/ -type l); do
 			if [ busybox readlink $i | busybox grep -q busybox ]; then
 				busybox rm $i
 			fi
@@ -183,5 +183,7 @@ SH-OTA(){ # v2.1 By Deic, DiamondBond & hoholee12
 			exit
 		fi
 	done
+
+	rm -f /tmp/*
 }
 SH-OTA
