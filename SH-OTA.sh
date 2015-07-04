@@ -14,9 +14,9 @@ SH-OTA(){ # v2.1 By Deic, DiamondBond & hoholee12
 
 	# Don't touch from here
 	busybox_status=`getprop persist.sh_ota.bb.status`
+	download=`am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity`
 	busybox_cloud="https://github.com/DeicPro/Download/releases/download/busybox/busybox"
 	curl_cloud="https://github.com/DeicPro/Download/releases/download/curl/curl.zip"
-	download=`am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity`
 	base_name=`basename $0`
 
 	mount -o remount,rw rootfs
@@ -46,6 +46,7 @@ SH-OTA(){ # v2.1 By Deic, DiamondBond & hoholee12
 		chmod 755 /system/xbin/busybox
 		busybox --install -s /system/xbin/
 		setprop persist.sh_ota.bb.status "1"
+		cd /
 		clear
 		echo "Installed."
 	fi
