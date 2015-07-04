@@ -2,19 +2,17 @@ SH-OTA(){ # v2.1 By Deic, DiamondBond & hoholee12
 
 	# Configuration
 	version="version"
-	cloud="https://your_site.com/version.sh"
+	cloud="https://your_site.com/update.txt"
 
 	# Optional
-	notes="
-changelog or something
-"
+	notes="https://your_site.com/notes.txt"
+
 	# 0/1 = Disabled/Enabled
+	show_version"1"
 	show_notes="0"
-	show_version="1"
 
 
 	# Don't touch from here
-	info=`if [ "$show_version" == 1 ]; then echo "$version"; echo; elif [ "$show_notes" == 1 ]; then echo "$notes"; echo; fi`
 	base_name=`basename $0`
 
 	mount -o remount,rw rootfs
@@ -73,28 +71,36 @@ changelog or something
 
 	clear
 	echo "Checking updates..."
-	curl -k -L -o /tmp/version.sh $cloud 2>/dev/null
+	curl -k -L -o /tmp/update.txt $cloud 2>/dev/null
 
 	while true; do
-		if [ -f /tmp/version.sh ]; then
-			if [ "`grep $version /tmp/version.sh 2>/dev/null`" ]; then
+		if [ -f /tmp/update.txt ]; then
+			if [ "`grep $1 /tmp/update.txt.sh 2>/dev/null`" ]; then
 				clear
 				echo "You have the latest version."
 				sleep 1.5
 				install="0"
 				break
 			else
+				if [ "$show_version" == 1 ]; then
+version_opt=": $version"
+else
+version_opt="..."
+fi
+if [ "$show_notes" == 1 ]; then
+curl -k -L -o /tmp/notes.txt $notes 2>/dev/null
+notes_opt=$(grep $1 /tmp/update.txt | awk '{print}' )
+echo
+fi
 				clear
-				echo "A new version of the script was found..."
-				sleep 1.5
-				clear
+				echo "A new version of the script was found$version_opt"
 				echo
-				$info
+				$notes_opt
 				echo "Want install it? (Y/N)"
 				echo
 				echo -n "> "
-				read install_opt
-				case $install_opt in
+				read i
+				case $i in
 					y|Y )
 						install="1"
 						break
@@ -116,8 +122,8 @@ changelog or something
 		clear
 		echo "Downloading..."
 
-		for script_cloud in $(grep cloud /tmp/version.sh | awk '{print $2}' ); do
-			curl -k -L -o /tmp/$base_name $script_cloud 2>/dev/null
+		for i in $(grep $2 /tmp/update.txt | awk '{print $2}' ); do
+			curl -k -L -o /tmp/$base_name $i 2>/dev/null
 		done
 	fi
 
