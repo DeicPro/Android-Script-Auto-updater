@@ -1,2 +1,2 @@
-version: version
-cloud: https://your_site.com/your_script.sh
+Write your version in this line.
+Write the url to your latest script in this line.
