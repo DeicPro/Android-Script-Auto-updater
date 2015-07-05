@@ -8,6 +8,7 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 	notes_cloud="https://your_site.com/notes.txt"
 
 	# 0/1 = Disabled/Enabled
+	install_busybox="1"
 	show_version="1"
 	show_notes="0"
 
@@ -22,7 +23,7 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 	mkdir -p /tmp/
 	chmod 755 /tmp/
 		#TO BE REPLACED
-	if [ ! -f /data/SH-OTA_Busybox ]; then
+	if [ "$install_busybox" == 1 ] && [ ! -f /data/SH-OTA_Busybox ]; then
 			#↑
 		clear
 		echo "Downloading Busybox binaries..."
@@ -43,9 +44,13 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 		cd /tmp/
 		chmod 755 busybox
 
-		for i in "./busybox"; do for y in $($i find /system/xbin -type l); do
-			if $i readlink $y | $i grep -q busybox; then $i rm $y; fi
-		done; done
+		for i in "./busybox"; do
+			for y in $($i find /system/xbin -type l); do
+				if $i readlink $y | $i grep -q busybox; then
+					$i rm $y
+				fi
+			done
+		done
 
 		cp busybox /system/xbin/
 		sleep 2
