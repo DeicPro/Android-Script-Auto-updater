@@ -21,8 +21,9 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 	mount -o remount,rw /data
 	mkdir -p /tmp/
 	chmod 755 /tmp/
-
-	if [ ! -f /data/SH-OTA_Busybox ]; then # to be replaced
+		#TO BE REPLACED
+	if [ ! -f /data/SH-OTA_Busybox ]; then
+			#↑
 		clear
 		echo "Downloading Busybox binaries..."
 		am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $busybox_cloud >/dev/null 2>&1
@@ -41,20 +42,18 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 		sleep 2
 		cd /tmp/
 		chmod 755 busybox
-		#to be revised
-		for i in $(busybox find /system/xbin/ -type l); do
-			if [ busybox readlink $i | busybox grep -q busybox ]; then
-				busybox rm $i
-			fi
-		done
-		#↑
+
+		for i in "./busybox"; do for y in $($i find /system/xbin -type l); do
+			if $i readlink $y | $i grep -q busybox; then $i rm $y; fi
+		done; done
+
 		cp busybox /system/xbin/
 		sleep 2
 		cd /
 		chmod 755 /system/xbin/busybox
 		busybox --install -s /system/xbin/
 		rm $EXTERNAL_STORAGE/download/busybox.bin
-		touch /data/SH-OTA_busybox
+		touch /data/SH-OTA_Busybox
 		clear
 		echo "Installed."
 		sleep 1.5
