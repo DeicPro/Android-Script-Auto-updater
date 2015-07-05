@@ -108,20 +108,20 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 				break
 			else
 				if [ "$show_version" == 1 ]; then
-					version_=": $version"
+					version_opt=": $version"
 				else
-					version_="..."
+					version_opt="..."
 				fi
 
 				if [ "$show_notes" == 1 ]; then
-					notes=$(cat /tmp/notes.txt)
+					notes_opt=$(cat /tmp/notes.txt)
 					echo
 				fi
 
 				clear
-				echo "A new version of the script was found$version_"
+				echo "A new version of the script was found$version_opt"
 				echo
-				$notes
+				$notes_opt
 				echo "Want install it? (Y/N)"
 				echo
 				echo -n "> "
