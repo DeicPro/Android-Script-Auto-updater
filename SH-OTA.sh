@@ -11,7 +11,6 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 	show_version="1"
 	show_notes="0"
 
-
 	# Don't touch from here
 	busybox_cloud="https://github.com/DeicPro/Download/releases/download/busybox/busybox"
 	curl_cloud="https://github.com/DeicPro/Download/releases/download/curl/curl.zip"
@@ -23,35 +22,38 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 	mkdir -p /tmp/
 	chmod 755 /tmp/
 
-	if [ ! -f /data/SH-OTA_Busybox]; then # to be replaced
+	if [ ! -f /data/SH-OTA_Busybox ]; then # to be replaced
 		clear
 		echo "Downloading Busybox binaries..."
 		am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $busybox_cloud >/dev/null 2>&1
 
 		while true; do
-			if [ -f $EXTERNAL_STORAGE/download/busybox ]; then
+			if [ -f $EXTERNAL_STORAGE/download/busybox.bin ]; then
 				kill -9 $(pgrep com.android.browser)
-				sleep 10
+				sleep 5
 				break
 			fi
 		done
 
 		clear
 		echo "Installing Busybox..."
-		cp $EXTERNAL_STORAGE/download/busybox /tmp/
+		cp $EXTERNAL_STORAGE/download/busybox.bin /tmp/busybox
+		sleep 2
 		cd /tmp/
 		chmod 755 busybox
-
+		#to be revised
 		for i in $(busybox find /system/xbin/ -type l); do
 			if [ busybox readlink $i | busybox grep -q busybox ]; then
 				busybox rm $i
 			fi
 		done
-
+		#↑
 		cp busybox /system/xbin/
+		sleep 2
 		cd /
 		chmod 755 /system/xbin/busybox
 		busybox --install -s /system/xbin/
+		rm $EXTERNAL_STORAGE/download/busybox.bin
 		touch /data/SH-OTA_busybox
 		clear
 		echo "Installed."
@@ -69,7 +71,7 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 		while true; do
 			if [ -f $EXTERNAL_STORAGE/download/curl.zip ]; then
 				kill -9 $(pgrep com.android.browser)
-				sleep 10
+				sleep 5
 				break
 			fi
 		done
@@ -128,7 +130,7 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 				echo "A new version of the script was found$version_opt"
 				echo
 
-								if [ "$show_notes" == 1 ] && [ -f /tmp/notes.txt ]; then
+				if [ "$show_notes" == 1 ] && [ -f /tmp/notes.txt ]; then
 					cat /tmp/notes.txt
 					echo
 				fi
