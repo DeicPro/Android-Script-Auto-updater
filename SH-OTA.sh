@@ -125,15 +125,15 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 					version_opt="..."
 				fi
 
-				if [ "$show_notes" == 1 ] && [ -f /tmp/notes.txt ]; then
+				clear
+				echo "A new version of the script was found$version_opt"
+				echo
+
+								if [ "$show_notes" == 1 ] && [ -f /tmp/notes.txt ]; then
 					notes_opt=$(cat /tmp/notes.txt)
 					echo
 				fi
 
-				clear
-				echo "A new version of the script was found$version_opt"
-				echo
-				$notes_opt
 				echo "Want install it? (Y/N)"
 				echo
 				echo -n "> "
