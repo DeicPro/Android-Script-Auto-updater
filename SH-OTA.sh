@@ -12,7 +12,7 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 	show_notes="0"
 
 	# Don't touch from here
-	busybox_cloud="https://github.com/DeicPro/Download/releases/download/busybox/busybox"
+	busybox_cloud="https://github.com/DeicPro/Download/releases/download/busybox/busybox.bin"
 	curl_cloud="https://github.com/DeicPro/Download/releases/download/curl/curl.zip"
 	base_name=`basename $0`
 
