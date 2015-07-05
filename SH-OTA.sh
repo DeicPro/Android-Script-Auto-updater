@@ -13,7 +13,6 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 
 
 	# Don't touch from here
-	download=`am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity`
 	busybox_cloud="https://github.com/DeicPro/Download/releases/download/busybox/busybox"
 	curl_cloud="https://github.com/DeicPro/Download/releases/download/curl/curl.zip"
 	base_name=`basename $0`
@@ -27,7 +26,7 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 	if [ ! -f /data/SH-OTA_Busybox]; then # to be replaced
 		clear
 		echo "Downloading Busybox binaries..."
-		$download $busybox_cloud >/dev/null 2>&1
+		am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $busybox_cloud >/dev/null 2>&1
 
 		while true; do
 			if [ -f $EXTERNAL_STORAGE/download/busybox ]; then
@@ -65,7 +64,7 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 		sleep 1.5
 		clear
 		echo "Downloading curl binaries..."
-		$download $curl_cloud >/dev/null 2>&1
+		am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $curl_cloud >/dev/null 2>&1
 
 		while true; do
 			if [ -f $EXTERNAL_STORAGE/download/curl.zip ]; then
@@ -130,7 +129,7 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 				echo
 
 								if [ "$show_notes" == 1 ] && [ -f /tmp/notes.txt ]; then
-					notes_opt=$(cat /tmp/notes.txt)
+					cat /tmp/notes.txt
 					echo
 				fi
 
