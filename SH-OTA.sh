@@ -114,7 +114,7 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 				fi
 
 				if [ "$show_notes" == 1 ]; then
-					notes_opt=$(grep /tmp/update.txt | awk '{print}' )
+					notes_opt=$(grep /tmp/notes.txt | awk '{print}' )
 					echo
 				fi
 
