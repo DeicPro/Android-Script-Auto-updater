@@ -61,36 +61,32 @@ sleep 1.5
 		echo "Downloading curl binaries..."
 		$download $curl_cloud >/dev/null 2>&1
 		sleep 10
-		curl="1"
-	fi
-
-	if [ "$curl" == 1 ]; then
 		kill -9 $(pgrep com.android.browser)
+
 		clear
 		echo "Installing..."
 		unzip -oq $EXTERNAL_STORAGE/download/curl.zip -d /tmp/
-	fi
 
-	while true; do
-		if [ -f /tmp/curl ] && [ -f /tmp/openssl ] && [ -f /tmp/openssl.cnf ] && [ -f /tmp/ca-bundle.crt ]; then
-			mkdir /data/local/ssl/
-			mkdir /data/local/ssl/certs/
-			cd /tmp/
-			cp -f curl /system/xbin/
-			cp -f openssl /system/xbin/
-			cp -f openssl.cnf /data/local/ssl/
-			cp -f ca-bundle.crt /data/local/ssl/certs/
-			sleep 2
-			cd /
-			chmod -R 755 /system/xbin/
-			chmod -R 755 /data/local/ssl/
-			rm -f $EXTERNAL_STORAGE/download/curl.zip
+		while true; do
+			if [ -f /tmp/curl ] && [ -f /tmp/openssl ] && [ -f /tmp/openssl.cnf ] && [ -f /tmp/ca-bundle.crt ]; then
+				mkdir /data/local/ssl/
+				mkdir /data/local/ssl/certs/
+				cd /tmp/
+				cp -f curl /system/xbin/
+				cp -f openssl /system/xbin/
+				cp -f openssl.cnf /data/local/ssl/
+				cp -f ca-bundle.crt /data/local/ssl/certs/
+				sleep 2
+				cd /
+				chmod -R 755 /system/xbin/
+				chmod -R 755 /data/local/ssl/
+				rm -f $EXTERNAL_STORAGE/download/curl.zip
 
-			clear
-			echo "Installed."
-			sleep 1.5
-			break
-		fi
+				clear
+				echo "Installed."
+				sleep 1.5
+				break
+			fi
 		done
 	fi
 
