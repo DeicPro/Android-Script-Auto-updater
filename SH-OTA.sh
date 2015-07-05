@@ -22,9 +22,9 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 	mount -o remount,rw /data
 	mkdir -p /tmp/
 	chmod 755 /tmp/
-		#TO BE REPLACED
+					#TO BE REPLACED
 	if [ "$install_busybox" == 1 ] && [ ! -f /data/SH-OTA_Busybox ]; then
-			#↑
+						#↑
 		clear
 		echo "Downloading Busybox binaries..."
 		am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $busybox_cloud >/dev/null 2>&1
