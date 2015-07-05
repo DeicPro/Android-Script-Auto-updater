@@ -29,6 +29,8 @@ SH-OTA(){ # v2.1 By Deic, DiamondBond & hoholee12
 		echo "Downloading Busybox binaries..."
 		sleep 1.5
 		$download $busybox_cloud >/dev/null 2>&1
+		sleep 10
+
 		clear
 		echo "Installing Busybox..."
 		cp $EXTERNAL_STORAGE/download/busybox /tmp/
@@ -48,6 +50,7 @@ SH-OTA(){ # v2.1 By Deic, DiamondBond & hoholee12
 		setprop persist.sh_ota.bb.status "1"
 		clear
 		echo "Installed."
+sleep 1.5
 	fi
 
 	if [ ! -f /system/xbin/curl ]; then
@@ -62,41 +65,32 @@ SH-OTA(){ # v2.1 By Deic, DiamondBond & hoholee12
 	fi
 
 	if [ "$curl" == 1 ]; then
-		while true; do
-			if [ -f $EXTERNAL_STORAGE/download/curl.zip ]; then
-				kill -9 $(pgrep com.android.browser)
-				clear
-				echo "Installing..."
-				unzip -oq $EXTERNAL_STORAGE/download/curl.zip -d /tmp/
-				break
-			fi
-		done
+		kill -9 $(pgrep com.android.browser)
+		clear
+		echo "Installing..."
+		unzip -oq $EXTERNAL_STORAGE/download/curl.zip -d /tmp/
+	fi
 
-		while true; do
-			if [ -f /tmp/curl ] && [ -f /tmp/openssl ] && [ -f /tmp/openssl.cnf ] && [ -f /tmp/ca-bundle.crt ]; then
-				mkdir /data/local/ssl/
-				mkdir /data/local/ssl/certs/
-				cd /tmp/
-				cp -f curl /system/xbin/
-				cp -f openssl /system/xbin/
-				cp -f openssl.cnf /data/local/ssl/
-				cp -f ca-bundle.crt /data/local/ssl/certs/
-				sleep 2
-				cd /
-				chmod -R 755 /system/xbin/
-				chmod -R 755 /data/local/ssl/
-				rm -f $EXTERNAL_STORAGE/download/curl.zip
-				break
-			fi
-		done
+	while true; do
+		if [ -f /tmp/curl ] && [ -f /tmp/openssl ] && [ -f /tmp/openssl.cnf ] && [ -f /tmp/ca-bundle.crt ]; then
+			mkdir /data/local/ssl/
+			mkdir /data/local/ssl/certs/
+			cd /tmp/
+			cp -f curl /system/xbin/
+			cp -f openssl /system/xbin/
+			cp -f openssl.cnf /data/local/ssl/
+			cp -f ca-bundle.crt /data/local/ssl/certs/
+			sleep 2
+			cd /
+			chmod -R 755 /system/xbin/
+			chmod -R 755 /data/local/ssl/
+			rm -f $EXTERNAL_STORAGE/download/curl.zip
 
-		while true; do
-			if [ -f /system/xbin/curl ] && [ -f /system/xbin/openssl ] && [ -f /data/local/ssl/openssl.cnf ] && [ -f /data/local/ssl/certs/ca-bundle.crt ]; then
-				clear
-				echo "Installed."
-				sleep 1.5
-				break
-			fi
+			clear
+			echo "Installed."
+			sleep 1.5
+			break
+		fi
 		done
 	fi
 
