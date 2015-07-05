@@ -24,12 +24,18 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 	mkdir -p /tmp/
 	chmod 755 /tmp/
 
-	if [ getprop persist.sh_ota.bb.status == "" ]; then # to be replaced
+	if [ ! -f /data/SH-OTA_Busybox]; then # to be replaced
 		clear
 		echo "Downloading Busybox binaries..."
 		$download $busybox_cloud >/dev/null 2>&1
-		sleep 10
-		kill -9 $(pgrep com.android.browser)
+
+		while true; do
+			if [ -f $EXTERNAL_STORAGE/download/busybox ]; then
+				kill -9 $(pgrep com.android.browser)
+				sleep 10
+				break
+			fi
+		done
 
 		clear
 		echo "Installing Busybox..."
@@ -47,7 +53,7 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 		cd /
 		chmod 755 /system/xbin/busybox
 		busybox --install -s /system/xbin/
-		setprop persist.sh_ota.bb.status "1"
+		touch /data/SH-OTA_busybox
 		clear
 		echo "Installed."
 		sleep 1.5
@@ -60,8 +66,14 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 		clear
 		echo "Downloading curl binaries..."
 		$download $curl_cloud >/dev/null 2>&1
-		sleep 10
-		kill -9 $(pgrep com.android.browser)
+
+		while true; do
+			if [ -f $EXTERNAL_STORAGE/download/curl.zip ]; then
+				kill -9 $(pgrep com.android.browser)
+				sleep 10
+				break
+			fi
+		done
 
 		clear
 		echo "Installing..."
@@ -113,7 +125,7 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 					version_opt="..."
 				fi
 
-				if [ "$show_notes" == 1 ]; then
+				if [ "$show_notes" == 1 ] && [ -f /tmp/notes.txt ]; then
 					notes_opt=$(cat /tmp/notes.txt)
 					echo
 				fi
