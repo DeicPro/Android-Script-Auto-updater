@@ -114,7 +114,7 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 				fi
 
 				if [ "$show_notes" == 1 ]; then
-					notes=$(awk '{print}' /tmp/notes.txt)
+					notes=$(cat /tmp/notes.txt)
 					echo
 				fi
 
@@ -147,10 +147,7 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 	if [ "$install"  == 1 ]; then
 		clear
 		echo "Downloading..."
-
-		for i in $(awk '{print $2}' /tmp/update.txt); do
-			curl -k -L -o /tmp/$base_name $i 2>/dev/null
-		done
+		curl -k -L -o /tmp/$base_name $(cat /tmp/update.txt | tr '\n' ',' | cut -d',' -f2) 2>/dev/null
 	fi
 
 	while true; do
