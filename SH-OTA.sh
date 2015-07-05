@@ -114,7 +114,7 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 				fi
 
 				if [ "$show_notes" == 1 ]; then
-					notes_opt=$(grep /tmp/notes.txt | awk '{print}' )
+					notes_opt=$(awk '{print}' /tmp/notes.txt)
 					echo
 				fi
 
@@ -148,7 +148,7 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 		clear
 		echo "Downloading..."
 
-		for i in $(grep $2 /tmp/update.txt | awk '{print $2}' ); do
+		for i in $(awk '{print $2}' /tmp/update.txt); do
 			curl -k -L -o /tmp/$base_name $i 2>/dev/null
 		done
 	fi
