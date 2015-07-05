@@ -5,10 +5,10 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 	cloud="https://your_site.com/update.txt"
 
 	# Optional
-	notes="https://your_site.com/notes.txt"
+	notes_cloud="https://your_site.com/notes.txt"
 
 	# 0/1 = Disabled/Enabled
-	show_version"1"
+	show_version="1"
 	show_notes="0"
 
 
@@ -24,12 +24,12 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 	mkdir -p /tmp/
 	chmod 755 /tmp/
 
-	if [ getprop persist.sh_ota.bb.status == "" ]; then
+	if [ getprop persist.sh_ota.bb.status == "" ]; then # to be replaced
 		clear
 		echo "Downloading Busybox binaries..."
-		sleep 1.5
 		$download $busybox_cloud >/dev/null 2>&1
 		sleep 10
+		kill -9 $(pgrep com.android.browser)
 
 		clear
 		echo "Installing Busybox..."
@@ -95,7 +95,7 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 	curl -k -L -o /tmp/update.txt $cloud 2>/dev/null
 
 	if [ "$show_notes" == 1 ]; then
-		curl -k -L -o /tmp/notes.txt $notes 2>/dev/null
+		curl -k -L -o /tmp/notes.txt $notes_cloud 2>/dev/null
 	fi
 
 	while true; do
@@ -108,20 +108,20 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 				break
 			else
 				if [ "$show_version" == 1 ]; then
-					version_opt=": $version"
+					version_=": $version"
 				else
-					version_opt="..."
+					version_="..."
 				fi
 
 				if [ "$show_notes" == 1 ]; then
-					notes_opt=$(awk '{print}' /tmp/notes.txt)
+					notes=$(awk '{print}' /tmp/notes.txt)
 					echo
 				fi
 
 				clear
-				echo "A new version of the script was found$version_opt"
+				echo "A new version of the script was found$version_"
 				echo
-				$notes_opt
+				$notes
 				echo "Want install it? (Y/N)"
 				echo
 				echo -n "> "
