@@ -1,4 +1,4 @@
-SH-OTA(){ # v2.1 By Deic, DiamondBond & hoholee12
+SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 
 	# Configuration
 	version="version"
@@ -50,7 +50,7 @@ SH-OTA(){ # v2.1 By Deic, DiamondBond & hoholee12
 		setprop persist.sh_ota.bb.status "1"
 		clear
 		echo "Installed."
-sleep 1.5
+		sleep 1.5
 	fi
 
 	if [ ! -f /system/xbin/curl ]; then
