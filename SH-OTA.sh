@@ -114,7 +114,7 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 				fi
 
 				if [ "$show_notes" == 1 ]; then
-					notes_opt=$(cat /tmp/notes.txt)
+					notes_opt=$(awk '{print}' /tmp/notes.txt)
 					echo
 				fi
 
