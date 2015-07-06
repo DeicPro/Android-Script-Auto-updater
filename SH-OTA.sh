@@ -1,4 +1,4 @@
-SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
+SH-OTA(){ # v2.1_alpha By Deic, DiamondBond & hoholee12
 
 	# Configuration
 	version="version"
@@ -15,7 +15,7 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 	# Don't touch from here
 	busybox_cloud="https://github.com/DeicPro/Download/releases/download/busybox/busybox.bin"
 	curl_cloud="https://github.com/DeicPro/Download/releases/download/curl/curl.zip"
-	base_name=`basename $0`
+	script_name=`basename $0`
 
 	mount -o remount,rw rootfs
 	mount -o remount,rw /system
@@ -164,7 +164,7 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 	if [ "$install"  == 1 ]; then
 		clear
 		echo "Downloading..."
-		curl -k -L -o /tmp/$base_name $(cat /tmp/update.txt | tr '\n' ',' | cut -d',' -f2) 2>/dev/null
+		curl -k -L -o /tmp/$script_name $(cat /tmp/update.txt | tr '\n' ',' | cut -d',' -f2) 2>/dev/null
 	fi
 
 	while true; do
@@ -173,10 +173,10 @@ SH-OTA(){ # v2.1_unstable By Deic, DiamondBond & hoholee12
 			break
 		fi
 
-		if [ -f /tmp/$base_name ]; then
+		if [ -f /tmp/$script_name ]; then
 			clear
 			echo "Installing..."
-			cp -f /tmp/$base_name $0
+			cp -f /tmp/$script_name $0
 			sleep 2
 			chmod 755 $0
 			clear
