@@ -1,12 +1,8 @@
 #SH-OTA v2.0 Manual
 
-**1. Download SH-OTA.sh**
+**1.** [Download SH-OTA.sh](https://github.com/DeicPro/SH-OTA/releases/download/v2.0/SH-OTA.sh)
 
-https://github.com/DeicPro/SH-OTA/releases/download/v2.0/SH-OTA.sh
-
-**2. Download version.sh**
-
-https://github.com/DeicPro/SH-OTA/releases/download/v2.0/version.sh
+**2.** [Download version.sh](https://github.com/DeicPro/SH-OTA/releases/download/v2.0/version.sh)
 
 **3. Edit your script**
 
