@@ -15,6 +15,7 @@ SH-OTA(){ # v2.1_alpha By Deic, DiamondBond & hoholee12
 	dir="/data/SH-OTA/"
 	tools_cloud="https://github.com/DeicPro/Download/releases/download/Tools/SH-OTA_Tools.zip"
 	download_dir="$EXTERNAL_STORAGE/download/"
+	curl="$dir/curl"
 	busybox="$dir/busybox"
 	script_name=`basename $0`
 
@@ -39,10 +40,7 @@ SH-OTA(){ # v2.1_alpha By Deic, DiamondBond & hoholee12
 
 		clear
 		echo "Installing SH-OTA Tools..."
-		cp -f $download_dir/SH-OTA_Tools.zip $dir/Tools.zip
-		sleep 2
-		chmod 755 $dir/Tools.zip
-		unzip -o -q $dir/Tools.zip
+		unzip -o -q $download_dir/SH-OTA_Tools.zip -d $dir
 
 		while true; do
 			if [ -f $dir/busybox ] && [ -f $dir/curl ] && [ -f $dir/openssl ] && [ -f $dir/ssl/openssl.cnf] && [ -f $dir/ssl/certs/ca-bundle.crt ]; then
@@ -51,21 +49,21 @@ SH-OTA(){ # v2.1_alpha By Deic, DiamondBond & hoholee12
 				chmod -R 755 /data/SH-OTA/
 				chmod -R 755 /data/local/ssl/
 				rm -f $download_dir/SH-OTA_Tools.zip
-				rm -f $dir/Tools.zip
 				rm -f -R $dir/ssl/
 				clear
 				echo "Installed."
 				sleep 1.5
+				break
 			fi
 		do
 	fi
 
 	clear
 	echo "Checking updates..."
-	curl -k -L -o $dir/update.txt $cloud 2>/dev/null
+	$curl -k -L -o $dir/update.txt $cloud 2>/dev/null
 
 	if [ "$show_notes" == 1 ]; then
-		curl -k -L -o $dir/notes.txt $notes_cloud 2>/dev/null
+		$curl -k -L -o $dir/notes.txt $notes_cloud 2>/dev/null
 	fi
 
 	while true; do
@@ -88,7 +86,7 @@ SH-OTA(){ # v2.1_alpha By Deic, DiamondBond & hoholee12
 				echo
 
 				if [ "$show_notes" == 1 ] && [ -f $dir/notes.txt ]; then
-					cat tmp/notes.txt
+					$busybox cat tmp/notes.txt
 					echo
 				fi
 
@@ -117,7 +115,7 @@ SH-OTA(){ # v2.1_alpha By Deic, DiamondBond & hoholee12
 	if [ "$install"  == 1 ]; then
 		clear
 		echo "Downloading..."
-		curl -k -L -o $dir/$script_name $(cat $dir/update.txt | tr '\n' ',' | cut -d',' -f2) 2>/dev/null
+		$curl -k -L -o $dir/$script_name $($busybox cat $dir/update.txt | $busybox tr '\n' ',' | $busybox cut -d',' -f2) 2>/dev/null
 	fi
 
 	while true; do
