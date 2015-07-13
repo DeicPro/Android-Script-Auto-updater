@@ -14,9 +14,9 @@ SH-OTA(){ # v2.1_alpha By Deic, DiamondBond & hoholee12
 	# Don't touch from here
 	data_dir="/data/SH-OTA/"
 	tools_version="$data_dir/tools_v1.0"
-	tools_cloud="https://github.com/DeicPro/Download/releases/download/SH-OTA_Tools/SH-OTA_Tools.zip"
-	download_dir="$EXTERNAL_STORAGE/download/"
-$done="$data_dir/zzz"
+	tools_cloud="https://github.com/DeicPro/Download/releases/download/SH-OTA_Tools/$tools_zip"
+	tools_zip="$EXTERNAL_STORAGE/download/SH-OTA_Tools.zip"
+	$done="$data_dir/zzz"
 	script_name=`basename $0`
 
 	mount -o remount,rw rootfs
@@ -47,7 +47,11 @@ $done="$data_dir/zzz"
 				#cp -f -R $data_dir/ssl/ /data/local/
 				#sleep 2
 				chmod -R 755 $data_dir
+							$data_dir/busybox/busybox --install -s $data_dir/busybox/
+				chmod -R 755 $data_dir
 				#chmod -R 755 /data/local/ssl/
+				rm -f $done
+				rm -f $tools_zip
 				clear
 				echo "Installed."
 				sleep 1.5
