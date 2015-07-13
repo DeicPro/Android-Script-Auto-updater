@@ -19,7 +19,7 @@ SH-OTA(){ # v2.1_alpha By Deic, DiamondBond & hoholee12
 	done="$data_dir/zzz"
 	script_name=`basename $0`
 
-	cd $data_dir/busybox/
+	cd $data_dir/busybox/ 2>/dev/null
 	mount -o remount,rw rootfs
 	mount -o remount,rw /system
 	mount -o remount,rw /data
@@ -48,7 +48,7 @@ SH-OTA(){ # v2.1_alpha By Deic, DiamondBond & hoholee12
 				#cp -f -R $data_dir/ssl/ /data/local/
 				#sleep 2
 				chmod -R 755 $data_dir
-						$data_dir/busybox/busybox --install -s $data_dir/busybox/
+				$data_dir/busybox/busybox --install -s $data_dir/busybox/
 				chmod -R 755 $data_dir
 				#chmod -R 755 /data/local/ssl/
 				rm -f $done
