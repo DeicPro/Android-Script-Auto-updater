@@ -16,9 +16,10 @@ SH-OTA(){ # v2.1_alpha By Deic, DiamondBond & hoholee12
 	tools_version="$data_dir/tools_v1.0"
 	tools_cloud="https://github.com/DeicPro/Download/releases/download/SH-OTA_Tools/$tools_zip"
 	tools_zip="$EXTERNAL_STORAGE/download/SH-OTA_Tools.zip"
-	$done="$data_dir/zzz"
+	done="$data_dir/zzz"
 	script_name=`basename $0`
 
+	cd $data_dir/busybox/
 	mount -o remount,rw rootfs
 	mount -o remount,rw /system
 	mount -o remount,rw /data
@@ -47,7 +48,7 @@ SH-OTA(){ # v2.1_alpha By Deic, DiamondBond & hoholee12
 				#cp -f -R $data_dir/ssl/ /data/local/
 				#sleep 2
 				chmod -R 755 $data_dir
-							$data_dir/busybox/busybox --install -s $data_dir/busybox/
+						$data_dir/busybox/busybox --install -s $data_dir/busybox/
 				chmod -R 755 $data_dir
 				#chmod -R 755 /data/local/ssl/
 				rm -f $done
@@ -140,5 +141,7 @@ SH-OTA(){ # v2.1_alpha By Deic, DiamondBond & hoholee12
 			exit
 		fi
 	done
+
+	cd /
 }
 SH-OTA
