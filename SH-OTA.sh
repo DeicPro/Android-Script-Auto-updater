@@ -32,7 +32,7 @@ SH-OTA(){ # v2.1_alpha By Deic, DiamondBond & hoholee12
 		am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $tools_cloud >/dev/null 2>&1
 
 		while true; do
-			if [ -f $download_dir/SH-OTA_Tools.zip ]; then
+			if [ -f $tools_zip ]; then
 				kill -9 $(pgrep com.android.browser)
 				sleep 5
 				break
