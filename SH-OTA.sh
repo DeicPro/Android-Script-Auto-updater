@@ -130,6 +130,7 @@ SH-OTA(){ # v2.1_alpha By Deic, DiamondBond & hoholee12
 			cp -f $data_dir/$script_name $0
 			sleep 2
 			chmod 755 $0
+			rm -f $data_dir/$script_name
 			clear
 			echo "Installed."
 			sleep 1.5
