@@ -28,7 +28,6 @@ SH-OTA(){ # v2.1_alpha By Deic, DiamondBond & hoholee12
 
 	if [ ! -f $tools_version ]; then
 		clear
-		rm -f $data_dir/tools_v*
 		echo "Downloading Tools..."
 		am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $tools_cloud >/dev/null 2>&1
 
@@ -42,6 +41,7 @@ SH-OTA(){ # v2.1_alpha By Deic, DiamondBond & hoholee12
 
 		clear
 		echo "Installing Tools..."
+		rm -f $data_dir/tools_v*
 		unzip -o -q $download_dir/SH-OTA_Tools.zip -d $data_dir
 
 		while true; do
