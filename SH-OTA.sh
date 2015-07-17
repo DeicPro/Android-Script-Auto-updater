@@ -14,7 +14,7 @@ SH-OTA(){ # v2.1_alpha By Deic, DiamondBond & hoholee12
 	# Don't touch from here
 	data_dir="/data/SH-OTA/"
 	tools_version="$data_dir/tools_v1.0"
-	tools_cloud="https://github.com/DeicPro/Download/releases/download/SH-OTA_Tools/$tools_zip"
+	tools_cloud="https://github.com/DeicPro/Download/releases/download/SH-OTA_Tools/SH-OTA_Tools.zip"
 	tools_zip="$EXTERNAL_STORAGE/download/SH-OTA_Tools.zip"
 	done="$data_dir/zzz"
 	script_name=`basename $0`
@@ -28,6 +28,7 @@ SH-OTA(){ # v2.1_alpha By Deic, DiamondBond & hoholee12
 
 	if [ ! -f $tools_version ]; then
 		clear
+		rm -f $data_dir/tools_v*
 		echo "Downloading Tools..."
 		am start -a android.intent.action.VIEW -n com.android.browser/.BrowserActivity $tools_cloud >/dev/null 2>&1
 
